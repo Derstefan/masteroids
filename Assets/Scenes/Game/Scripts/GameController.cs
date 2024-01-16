@@ -9,9 +9,8 @@ public class GameController : MonoBehaviour
     private int asteroidsRemaining;
     private int lives;
     private int wave;
-    private int increaseEachWave = 200;
+    private int increaseEachWave = 50;
 
-    // Use this for initialization
     void Start()
     {
 
@@ -19,11 +18,9 @@ public class GameController : MonoBehaviour
         BeginGame();
     }
 
-    // Update is called once per frame
     void Update()
     {
 
-        // Quit if player presses escape
         if (Input.GetKey("escape"))
             Application.Quit();
 
@@ -42,21 +39,13 @@ public class GameController : MonoBehaviour
         // livesText.text = "LIVES: " + lives;
         //  waveText.text = "WAVE: " + wave;
 
-        Debug.Log("start spawn");
         SpawnAsteroids();
-        Debug.Log("spawned");
     }
 
     void SpawnAsteroids()
     {
 
-        DestroyExistingAsteroids();
-
-        // Decide how many asteroids to spawn
-        // If any asteroids left over from previous game, subtract them
-        asteroidsRemaining = (wave * increaseEachWave);
-
-        for (int i = 0; i < asteroidsRemaining; i++)
+        for (int i = 0; i < wave * increaseEachWave; i++)
         {
 
             // Spawn an asteroid
@@ -70,77 +59,15 @@ public class GameController : MonoBehaviour
         // waveText.text = "WAVE: " + wave;
     }
 
-    public void IncrementScore()
-    {
-        score++;
-
-        // scoreText.text = "SCORE:" + score;
-
-        if (score > hiscore)
-        {
-            hiscore = score;
-            //  hiscoreText.text = "HISCORE: " + hiscore;
-
-            // Save the new hiscore
-            PlayerPrefs.SetInt("hiscore", hiscore);
-        }
-
-        // Has player destroyed all asteroids?
-        if (asteroidsRemaining < 1)
-        {
-
-            // Start next wave
-            wave++;
-            SpawnAsteroids();
-
-        }
-    }
-
     public void DecrementLives()
     {
         lives--;
         //  livesText.text = "LIVES: " + lives;
 
-        // Has player run out of lives?
         if (lives < 1)
         {
-            // Restart the game
-            Debug.Log("new game hs: " + hiscore);
             BeginGame();
         }
     }
 
-    public void DecrementAsteroids()
-    {
-        asteroidsRemaining--;
-    }
-
-    public void SplitAsteroid()
-    {
-        // Two extra asteroids
-        // - big one
-        // + 3 little ones
-        // = 2
-        asteroidsRemaining += 2;
-
-    }
-
-    void DestroyExistingAsteroids()
-    {
-        GameObject[] asteroids =
-            GameObject.FindGameObjectsWithTag("Large Asteroid");
-
-        foreach (GameObject current in asteroids)
-        {
-            GameObject.Destroy(current);
-        }
-
-        GameObject[] asteroids2 =
-            GameObject.FindGameObjectsWithTag("Small Asteroid");
-
-        foreach (GameObject current in asteroids2)
-        {
-            GameObject.Destroy(current);
-        }
-    }
 }

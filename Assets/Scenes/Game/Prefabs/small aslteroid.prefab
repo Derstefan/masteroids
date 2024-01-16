@@ -100,7 +100,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 40
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroy: {fileID: 0}
   smallAsteroid: {fileID: 0}
+  maxLife: 10
 --- !u!58 &8404953986554782819
 CircleCollider2D:
   m_ObjectHideFlags: 0

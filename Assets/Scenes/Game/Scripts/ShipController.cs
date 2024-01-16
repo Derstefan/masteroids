@@ -35,13 +35,18 @@ public class ShipController : MonoBehaviour
             AddForce(transform.up * thrustForce *
                 Input.GetAxis("Vertical"));
 
+
+
+    }
+
+    private void Update()
+    {
         // Has a bullet been fired
         if (Input.GetMouseButtonDown(0))
         {
             Debug.Log("Fire bullet");
             ShootBullet();
         }
-
     }
 
     void OnTriggerEnter2D(Collider2D c)

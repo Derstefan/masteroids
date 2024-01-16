@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 824648652756134062}
   - component: {fileID: 7554951267204595748}
   - component: {fileID: 7384851911272027815}
-  - component: {fileID: 7265482699860492243}
   - component: {fileID: 1587464806373998555}
   - component: {fileID: 6071842303519050972}
+  - component: {fileID: 8404953986554782819}
   m_Layer: 0
   m_Name: small aslteroid
   m_TagString: Small Asteroid
@@ -115,8 +115,34 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &7265482699860492243
-PolygonCollider2D:
+--- !u!114 &1587464806373998555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208719035873257249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 722a1a88f4247f84b94183f4d014643c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6071842303519050972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208719035873257249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e47774bc2040dae498191e7e18d63645, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroy: {fileID: 0}
+  smallAsteroid: {fileID: 0}
+--- !u!58 &8404953986554782819
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -150,65 +176,4 @@ PolygonCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.29, y: 1.03}
-    newSize: {x: 1.29, y: 1.03}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.645, y: -0.315}
-      - {x: 0.435, y: -0.515}
-      - {x: 0.645, y: -0.515}
-      - {x: 0.645, y: -0.065}
-      - {x: 0.53499997, y: 0.515}
-      - {x: -0.21499999, y: 0.515}
-      - {x: -0.505, y: 0.475}
-      - {x: -0.645, y: 0.285}
-    - - {x: 0.525, y: -0.405}
-      - {x: 0.505, y: -0.375}
-      - {x: 0.155, y: -0.195}
-      - {x: -0.435, y: -0.21499999}
-      - {x: -0.59499997, y: -0.225}
-      - {x: -0.585, y: -0.175}
-      - {x: -0.565, y: 0.175}
-      - {x: -0.415, y: 0.315}
-      - {x: -0.125, y: 0.465}
-      - {x: 0.36499998, y: 0.465}
-      - {x: 0.33499998, y: 0.435}
-      - {x: 0.185, y: 0.315}
-      - {x: 0.205, y: 0.285}
-      - {x: 0.405, y: -0.125}
-      - {x: 0.565, y: -0.435}
-      - {x: 0.575, y: -0.42499998}
-  m_UseDelaunayMesh: 0
---- !u!114 &1587464806373998555
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8208719035873257249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 722a1a88f4247f84b94183f4d014643c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6071842303519050972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8208719035873257249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e47774bc2040dae498191e7e18d63645, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroy: {fileID: 0}
-  smallAsteroid: {fileID: 0}
+  m_Radius: 0.545

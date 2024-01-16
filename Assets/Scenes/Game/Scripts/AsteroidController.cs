@@ -28,6 +28,11 @@ public class AsteroidController : MonoBehaviour
 
     }
 
+    void OnBecameInvisible()
+    {
+        enabled = false;
+    }
+
     void OnCollisionEnter2D(Collision2D c)
     {
 

@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     private int asteroidsRemaining;
     private int lives;
     private int wave;
-    private int increaseEachWave = 4;
+    private int increaseEachWave = 200;
 
     // Use this for initialization
     void Start()
@@ -42,7 +42,9 @@ public class GameController : MonoBehaviour
         // livesText.text = "LIVES: " + lives;
         //  waveText.text = "WAVE: " + wave;
 
+        Debug.Log("start spawn");
         SpawnAsteroids();
+        Debug.Log("spawned");
     }
 
     void SpawnAsteroids()
@@ -59,8 +61,8 @@ public class GameController : MonoBehaviour
 
             // Spawn an asteroid
             Instantiate(asteroid,
-                new Vector3(Random.Range(-9.0f, 9.0f),
-                    Random.Range(-6.0f, 6.0f), 0),
+                new Vector3(Random.Range(MapConfig.XMin, MapConfig.XMax),
+                    Random.Range(MapConfig.YMin, MapConfig.YMax), 0),
                 Quaternion.Euler(0, 0, Random.Range(-0.0f, 359.0f)));
 
         }

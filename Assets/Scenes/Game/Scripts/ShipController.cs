@@ -56,8 +56,8 @@ public class ShipController : MonoBehaviour
         if (c.gameObject.tag != "Bullet")
         {
 
-            AudioSource.PlayClipAtPoint
-                (crash, Camera.main.transform.position);
+            //AudioSource.PlayClipAtPoint
+            //   (crash, Camera.main.transform.position);
 
             // Move the ship to the centre of the screen
             transform.position = new Vector3(0, 0, 0);
@@ -79,6 +79,6 @@ public class ShipController : MonoBehaviour
             transform.rotation);
 
         // Play a shoot sound
-        AudioSource.PlayClipAtPoint(shoot, Camera.main.transform.position);
+        //AudioSource.PlayClipAtPoint(shoot, Camera.main.transform.position);
     }
 }

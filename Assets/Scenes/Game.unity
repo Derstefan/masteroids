@@ -373,9 +373,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26443969db949fe4896605bc84b8f23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crash: {fileID: 8300000, guid: 4ef679bde156b4849af04b213b1a314f, type: 3}
-  shoot: {fileID: 8300000, guid: 21168fdf7b6a5354a838dbd22f64da20, type: 3}
-  bullet: {fileID: 2880619533236538954, guid: af3a8021c81d7024ebed3fc735b4e3f9, type: 3}
+  allWeapons:
+  - {fileID: 1319726078215399999, guid: 5d64e5ec8bf9f5645846490a458bd4cf, type: 3}
+  - {fileID: 1319726078215399999, guid: 8d70a8cbc971edc429e260526f39b5e8, type: 3}
+  - {fileID: 1319726078215399999, guid: d38653fc2c2100244851921a5157c431, type: 3}
+  weapons: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,8 +563,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108463703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2408, y: 5.38, z: 20}
-  m_LocalScale: {x: 5.2355947, y: 5.0682826, z: 1}
+  m_LocalPosition: {x: 1.2483, y: 3.52, z: 20}
+  m_LocalScale: {x: 5.039944, y: 4.7053933, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

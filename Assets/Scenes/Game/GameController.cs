@@ -3,18 +3,18 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject[] asteroids;
+    [HideInInspector]
     public float[] lastSpawnTimes;
     public GameObject ship;
 
-    private int score;
+    public GameObject expPrefab;
+
+    // private int score;
     private int hiscore;
     private int lives;
 
 
 
-    private readonly int maxOverlapCount = 30;
-    private readonly int minOverlapDistance = 20;
-    private readonly float minDistance = 8f; // Adjust this value based on your desired minimum distance
 
     private int asteroidCount = 0;
 
@@ -62,7 +62,7 @@ public class GameController : MonoBehaviour
     void BeginGame()
     {
 
-        score = 0;
+        // score = 0;
         lives = 3;
 
         // SpawnAsteroids(asteroids[0], increaseEachWave);
@@ -93,7 +93,7 @@ public class GameController : MonoBehaviour
                 o.GetComponent<Rigidbody2D>().AddForce(o.transform.up * Random.Range(-50.0f, 6250.0f));
             }
         }
-        Debug.Log("Spawn " + count + " asteroids");
+        //Debug.Log("Spawn " + count + " asteroids");
     }
 
     public GameObject spawnAsteroid(GameObject prefab, Vector3 pos, Quaternion rot)
@@ -104,6 +104,10 @@ public class GameController : MonoBehaviour
 
     public void destroyAsteroid(GameObject asteroid)
     {
+        if (asteroid.GetComponent<AsteroidController>().spawnExp)
+        {
+            Instantiate(expPrefab, asteroid.transform.position, Quaternion.identity);
+        }
         asteroidCount--;
         Destroy(asteroid);
 
@@ -111,17 +115,17 @@ public class GameController : MonoBehaviour
 
     bool HasOverlap(Vector3 position)
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, minOverlapDistance);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, Config.minOverlapDistance);
 
         // Check if there are too many overlaps
-        return colliders.Length > maxOverlapCount;
+        return colliders.Length > Config.maxOverlapCount;
     }
 
     bool IsPositionNearShip(Vector3 position)
     {
 
         float distance = Vector3.Distance(position, ship.transform.position);
-        return distance < minDistance;
+        return distance < Config.minDistance;
     }
 
 

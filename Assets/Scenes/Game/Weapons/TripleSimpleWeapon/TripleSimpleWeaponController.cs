@@ -13,12 +13,25 @@ public class TripleSimpleWeaponController : WeaponController
 
     public override Skill[] getWeaponSkills()
     {
-        throw new System.NotImplementedException();
+        return new Skill[] {
+        new UnlockSkill("Triple Simple Weapon",0,null,this),
+        new LevelingSkill("Damage Triple Simple Weapon",0,"Triple Simple Weapon",this),
+        };
     }
 
     public override void learnSkill(string skillName)
     {
-        throw new System.NotImplementedException();
+        switch (skillName)
+        {
+            case "Triple Simple Weapon":
+                this.activated = true;
+                break;
+            case "Damage Triple Simple Weapon":
+                this.damage += 10;
+                break;
+            default:
+                throw new System.Exception("Skill not found");
+        }
     }
 
 }

@@ -140,14 +140,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnStartTimer: 0
-  spawnIntervall: 10
-  spawnAmount: 30
-  spawnAmountIncrease: 10
-  lastSpawnTime: 0
+  spawnIntervall: 20
+  spawnAmount: 20
+  spawnAmountIncrease: 3
   destroySound: {fileID: 0}
   splitterObjects: {fileID: 8208719035873257249, guid: 376b95b88ae079f4b9b7781f5124879a, type: 3}
   splitterAmount: 3
   maxLife: 100
+  spawnExp: 1
 --- !u!58 &466387624347149330
 CircleCollider2D:
   m_ObjectHideFlags: 0

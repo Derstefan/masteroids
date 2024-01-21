@@ -3,12 +3,13 @@
 
 
 using System.Linq;
+using UnityEngine;
 
 public class SkillManager
 {
     public ShipController shipController;
 
-    public Skill[] allSkills;
+    public Skill[] allSkills = new Skill[] { };
 
 
     public SkillManager(ShipController shipController)
@@ -16,29 +17,50 @@ public class SkillManager
         this.shipController = shipController;
     }
 
-    public void addSkills(Skill[] skills)
+    public void addStatSkills(Skill[] skills)
     {
-        allSkills = skills;
         foreach (Skill skill in skills)
         {
-            skill.shipController = shipController;
+            skill.shipStats = shipController.shipStats;
         }
+        allSkills = allSkills.Concat(skills).ToArray();
+    }
+
+    public void addWeaponSkills(Skill[] skills)
+    {
+        allSkills = allSkills.Concat(skills).ToArray();
+
     }
 
     public Skill getLearnableSkill()
     {
-        throw new System.NotImplementedException();
+        Skill[] skills = allSkills.Where(skill => checkLearnable(skill)).ToArray();
+        int randomIndex = Random.Range(0, skills.Length);
+        return skills[randomIndex];
+    }
+
+    public string getAllLearnableSkills()
+    {
+        return string.Join(", ", allSkills.Where(skill => checkLearnable(skill)).Select(skill => skill.name).ToArray());
     }
 
 
     public bool checkLearnable(Skill skill)
     {
-
-
         if (shipController.lvl < skill.minLevel) return false;
+        if (skill is UnlockSkill)
+        {
+            if ((skill as UnlockSkill).learned)
+            {
+                return false;
+            }
+        }
         Skill requiredSkill = getSkillByName(skill.requiredSkillName);
         if (requiredSkill == null) return true;
+
         if (!allSkills.Contains(requiredSkill)) throw new System.Exception("Skill not found");
+
+
         if (requiredSkill is UnlockSkill)
         {
             return (requiredSkill as UnlockSkill).learned;
@@ -47,6 +69,8 @@ public class SkillManager
         {
             return (requiredSkill as LevelingSkill).lvl > 0;
         }
+
+
         throw new System.Exception("Skill not found");
     }
 
@@ -72,9 +96,9 @@ public class SkillManager
         {
             skill.weaponController.learnSkill(skill.name);
         }
-        else if (skill.shipController != null)
+        else if (skill.shipStats != null)
         {
-            skill.shipController.learnSkill(skill.name);
+            skill.shipStats.learnSkill(skill.name);
         }
 
     }

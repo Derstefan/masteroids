@@ -14,9 +14,10 @@ public class AsteroidController : MonoBehaviour
     public GameObject splitterObjects;
     public int splitterAmount = 3;
     public float maxLife = 100f;
+
+    public bool spawnExp = true;
     private float currentLife;
 
-    private float blinkDuration = 0.05f;
 
 
     GameController GC;
@@ -46,6 +47,7 @@ public class AsteroidController : MonoBehaviour
 
             if (currentLife < 0)
             {
+                if (gameObject == null) return;
                 GC.destroyAsteroid(gameObject);
                 if (splitterObjects != null)
                 {
@@ -59,7 +61,6 @@ public class AsteroidController : MonoBehaviour
                 // gameController.IncrementScore();
 
             }
-
         }
     }
 
@@ -89,10 +90,10 @@ public class AsteroidController : MonoBehaviour
         Color startColor = Color.white; // Start color is white
         Color targetColor = Color.red; // Target color is red
 
-        while (elapsedTime < blinkDuration)
+        while (elapsedTime < Config.blinkDuration)
         {
             // Interpolate between start and target alpha values
-            float alpha = Mathf.Lerp(startAlpha, currentLife / maxLife, elapsedTime / blinkDuration);
+            float alpha = Mathf.Lerp(startAlpha, currentLife / maxLife, elapsedTime / Config.blinkDuration);
 
             // Interpolate between start and target colors based on life and maxLife
             Color lerpedColor = Color.Lerp(targetColor, startColor, currentLife / maxLife);

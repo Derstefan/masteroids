@@ -11,10 +11,12 @@ public class BiggerWeaponController : WeaponController
     public override Skill[] getWeaponSkills()
     {
         return new Skill[]{
-            new UnlockSkill("Bigger Weapon", 0,null),
-            new LevelingSkill("Demage Bigger Weapon", 1, "Bigger Weapon"),
+            new UnlockSkill("Bigger Weapon", 0,null,this),
+            new LevelingSkill("Damage Bigger Weapon", 0, "Bigger Weapon",this),
+            new LevelingSkill("AttackSpeed Bigger Weapon", 0, "Bigger Weapon",this),
+            new LevelingSkill("Projectil Speed Bigger Weapon", 0, "Damage Bigger Weapon",this),
 
-                };
+            };
     }
 
 
@@ -25,8 +27,14 @@ public class BiggerWeaponController : WeaponController
             case "Bigger Weapon":
                 this.activated = true;
                 break;
-            case "Demage Bigger Weapon":
+            case "Damage Bigger Weapon":
                 this.damage += 10;
+                break;
+            case "AttackSpeed Bigger Weapon":
+                this.attackSpeed -= 0.01f;
+                break;
+            case "Projectil Speed Bigger Weapon":
+                this.projectileSpeed += 0.1f;
                 break;
             default:
                 throw new System.Exception("Skill not found");

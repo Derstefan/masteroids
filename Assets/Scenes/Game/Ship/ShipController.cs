@@ -1,14 +1,17 @@
+using System.Linq;
 using UnityEngine;
 
 public class ShipController : MonoBehaviour
 {
-    private ShipStats stats;
+
 
     //    public AudioClip crash;
 
 
+    public GameObject[] allWeaponPrefabs;
+    [HideInInspector]
     public GameObject[] allWeapons;
-
+    [HideInInspector]
     public GameObject[] weapons;
 
     private int currentWeaponIndex = 0;
@@ -18,30 +21,68 @@ public class ShipController : MonoBehaviour
     private GameController gameController;
 
 
-    public int lvl = 0;
+    public int lvl = 1;
 
     private SkillManager skillManager;
-
+    [HideInInspector]
+    public ShipStats shipStats;
 
     void Start()
     {
-        stats = new ShipStats();
+        shipStats = new ShipStats();
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
 
+        init();
+
+    }
+
+    void init()
+    {
+        allWeapons = new GameObject[allWeaponPrefabs.Length];
+        for (int i = 0; i < allWeaponPrefabs.Length; i++)
+        {
+            allWeapons[i] = Instantiate(allWeaponPrefabs[i]);
+            allWeapons[i].transform.parent = transform;
+        }
         skillManager = new SkillManager(this);
-        skillManager.addSkills(stats.getSkills());
+        skillManager.addStatSkills(shipStats.getSkills());
         foreach (GameObject weapon in allWeapons)
         {
-            skillManager.addSkills(weapon.GetComponent<WeaponController>().getWeaponSkills());
+            skillManager.addWeaponSkills(weapon.GetComponent<WeaponController>().getWeaponSkills());
         }
-        // skillManager.learnSkill("Bigger Weapon");
+        // startSkills
+        learn("Simple Weapon");
 
-        //copy weapons from allWeapons to weapons
-        weapons = new GameObject[allWeapons.Length];
-        for (int i = 0; i < allWeapons.Length; i++)
+    }
+
+    void checkUnlockedWeapons()
+    {
+        foreach (GameObject weapon in allWeapons)
         {
-            weapons[i] = Instantiate(allWeapons[i]);
+            if (weapon.GetComponent<WeaponController>().activated == true && !weapons.Contains(weapon))
+            {
+                weapons = weapons.Concat(new GameObject[] { weapon }).ToArray();
+            }
         }
+    }
+
+    public void learn(string skillName)
+    {
+
+        skillManager.learnSkill(skillName);
+        checkUnlockedWeapons();
+        ResumeGame();
+    }
+
+    public Skill[] getRandomLearnableSkills(int amount)
+    {
+        Skill[] skills = new Skill[amount];
+        for (int i = 0; i < amount; i++)
+        {
+            skills[i] = skillManager.getLearnableSkill();
+        }
+        return skills;
+
     }
 
 
@@ -52,11 +93,28 @@ public class ShipController : MonoBehaviour
         direction.Normalize();
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
         float currentAngle = transform.rotation.eulerAngles.z;
-        float newAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, stats.rotationSpeed * Time.deltaTime);
+        float newAngle = Mathf.MoveTowardsAngle(currentAngle, targetAngle, shipStats.rotationSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 0, newAngle);
+
         Vector2 forceDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
-        GetComponent<Rigidbody2D>().AddForce(forceDirection * stats.thrustForce);
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+        // Apply force with a maximum speed constraint
+        float currentSpeed = rb.velocity.magnitude;
+        if (currentSpeed < shipStats.maxSpeed)
+        {
+            rb.AddForce(forceDirection * shipStats.speed);
+        }
+
+        // Adjust camera orthographic size based on velocity
+        float velocityMagnitude = rb.velocity.magnitude;
+
+        float zoomFactor = Mathf.Clamp(velocityMagnitude * 0.1f, 0f, 1f); // Adjust this factor based on your preference
+
+        Camera.main.orthographicSize = Mathf.Lerp(Config.minZoom, Config.maxZoom, zoomFactor);
     }
+
+
 
     void OnTriggerEnter2D(Collider2D c)
     {
@@ -88,8 +146,8 @@ public class ShipController : MonoBehaviour
             CycleWeapon(-1); // Scroll down
         }
 
-        if (weapons.Length == 0) return;
-        float attackRate = 1f / (weapons[currentWeaponIndex].GetComponent<WeaponController>().attackSpeed + stats.attackSpeed);
+        if (weapons.Length == 0) throw new System.Exception("No weapons available");
+        float attackRate = 1f / (weapons[currentWeaponIndex].GetComponent<WeaponController>().attackSpeed + shipStats.attackSpeed);
         if (Input.GetMouseButton(0) && timeSinceLastShot >= attackRate)
         {
             shoot();
@@ -99,6 +157,7 @@ public class ShipController : MonoBehaviour
 
     void CycleWeapon(int direction)
     {
+        if (weapons.Length == 0) throw new System.Exception("No weapons available");
         // Change the current weapon index based on the direction of the scroll
         currentWeaponIndex = (currentWeaponIndex + direction + weapons.Length) % weapons.Length;
     }
@@ -112,9 +171,33 @@ public class ShipController : MonoBehaviour
         weapons[currentWeaponIndex].GetComponent<WeaponController>().shoot(shootingPosition, transform.rotation);
     }
 
-
-    public void learnSkill(string skillName)
+    public void incrementExp()
     {
-        stats.learnSkill(skillName);
+        shipStats.exp++;
+        if (shipStats.exp >= shipStats.expToNextLvl)
+        {
+            lvl++;
+            shipStats.exp = 0;
+            shipStats.expToNextLvl = (int)(shipStats.expToNextLvl * 1.5);
+
+            Debug.Log("Level up! next " + shipStats.expToNextLvl);
+
+            Skill[] skills = getRandomLearnableSkills(3);
+            PauseGame();
+            //Debug.Log("Learned skills: " + skills[0].name + " " + skills[1].name + " " + skills[2].name);
+            learn(skills[0].name);
+            //Debug.Log("Learnable skills: " + skillManager.getAllLearnableSkills());
+        }
     }
+
+    void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+    void ResumeGame()
+    {
+        Time.timeScale = 1;
+    }
+
+
 }

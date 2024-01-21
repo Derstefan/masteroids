@@ -12,12 +12,26 @@ public class SimpleWeaponController : WeaponController
 
     public override Skill[] getWeaponSkills()
     {
-        throw new System.NotImplementedException();
+        return new Skill[] {
+        new UnlockSkill("Simple Weapon",0,null,this),
+        new LevelingSkill("Damage Simple Weapon",0,"Simple Weapon",this),
+        };
+
     }
 
     public override void learnSkill(string skillName)
     {
-        throw new System.NotImplementedException();
+        switch (skillName)
+        {
+            case "Simple Weapon":
+                this.activated = true;
+                break;
+            case "Damage Simple Weapon":
+                this.damage += 10;
+                break;
+            default:
+                throw new System.Exception("Skill not found");
+        }
     }
 
 }

@@ -7,4 +7,14 @@
     {
 
     }
+
+    public LevelingSkill(string name, int minLevel, string requiredSkill, WeaponController weaponController) : base(name, minLevel, requiredSkill, weaponController)
+    {
+
+    }
+
+    public LevelingSkill(string name, int minLevel, string requiredSkill, ShipStats shipStats) : base(name, minLevel, requiredSkill, shipStats)
+    {
+
+    }
 }

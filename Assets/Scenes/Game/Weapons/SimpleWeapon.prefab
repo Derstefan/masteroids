@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fac78d1ea431464b8318b1c78cf9925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 10
-  damage: 8
+  attackSpeed: 3
+  damage: 10
   lifeTime: 2
   projectileSpeed: 400
   projectilePrefab: {fileID: 2880619533236538954, guid: af3a8021c81d7024ebed3fc735b4e3f9, type: 3}
+  activated: 0

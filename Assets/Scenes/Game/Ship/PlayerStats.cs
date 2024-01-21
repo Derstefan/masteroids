@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class ShipStats
 {
-    public float rotationSpeed = 70.0f;
-    public float speed = 1f;
+    public float rotationSpeed = 110.0f;
+    public float speed = 3f;
     public int exp = 0;
-    public int expToNextLvl = 5;
+    public int expToNextLvl = 3;
     public float maxHealth = 100f;
     public float currentHealth = 100f;
-    public float maxSpeed = 10f;
+    public float maxSpeed = 20f;
 
-    public float attackSpeed = 0.3f;
+    public float attackSpeed = 0.8f;
 
 
 

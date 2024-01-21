@@ -9,20 +9,23 @@ public class AsteroidController : MonoBehaviour
     public int spawnAmount = 30;
     public int spawnAmountIncrease = 10;
 
-    public float lastSpawnTime = 0f;
-
 
     public AudioClip destroySound;
     public GameObject splitterObjects;
-    public float maxLife = 10f;
+    public int splitterAmount = 3;
+    public float maxLife = 100f;
     private float currentLife;
 
     private float blinkDuration = 0.05f;
 
+
+    GameController GC;
+
     void Start()
     {
-        currentLife = maxLife;
 
+        GC = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+        currentLife = maxLife;
         GetComponent<Rigidbody2D>()
             .AddForce(transform.up * Random.Range(-50.0f, 150.0f));
         GetComponent<Rigidbody2D>()
@@ -41,13 +44,12 @@ public class AsteroidController : MonoBehaviour
             StartCoroutine(SmoothBlink());
             currentLife -= demage;
 
-
             if (currentLife < 0)
             {
-                Destroy(gameObject);
+                GC.destroyAsteroid(gameObject);
                 if (splitterObjects != null)
                 {
-                    spawSmallerAsteroids();
+                    spawnSmallerAsteroids(splitterAmount);
                 }
 
                 // Play a sound
@@ -61,33 +63,22 @@ public class AsteroidController : MonoBehaviour
         }
     }
 
-    void spawSmallerAsteroids()
+    void spawnSmallerAsteroids(int numberOfAsteroids)
     {
-
         Vector2 velocity = GetComponent<Rigidbody2D>().velocity;
 
-        GameObject o1 = Instantiate(splitterObjects,
-            new Vector3(transform.position.x - .5f,
-                transform.position.y - .5f, 0),
-                Quaternion.Euler(0, 0, 90));
-        o1.GetComponent<Rigidbody2D>().velocity = velocity;
+        for (int i = 0; i < numberOfAsteroids; i++)
+        {
+            float angle = i * 360f / numberOfAsteroids;
 
-        GameObject o2 = Instantiate(splitterObjects,
-            new Vector3(transform.position.x + .5f,
-                transform.position.y + .0f, 0),
-                Quaternion.Euler(0, 0, 0));
-        o2.GetComponent<Rigidbody2D>().velocity = velocity;
+            GameObject splitterAsteroid = GC.spawnAsteroid(
+                splitterObjects,
+                transform.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0) * 0.5f,
+                Quaternion.Euler(0, 0, angle));
 
-
-        GameObject o3 = Instantiate(splitterObjects,
-            new Vector3(transform.position.x + .5f,
-                transform.position.y - .5f, 0),
-                Quaternion.Euler(0, 0, 270));
-        o3.GetComponent<Rigidbody2D>().velocity = velocity;
-
-
+            splitterAsteroid.GetComponent<Rigidbody2D>().velocity = velocity;
+        }
     }
-
 
 
     private IEnumerator SmoothBlink()

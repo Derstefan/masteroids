@@ -17,17 +17,30 @@ public class ShipController : MonoBehaviour
 
     private GameController gameController;
 
+
+    public int lvl = 0;
+
+    private SkillManager skillManager;
+
+
     void Start()
     {
         stats = new ShipStats();
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
 
+        skillManager = new SkillManager(this);
+        skillManager.addSkills(stats.getSkills());
+        foreach (GameObject weapon in allWeapons)
+        {
+            skillManager.addSkills(weapon.GetComponent<WeaponController>().getWeaponSkills());
+        }
+        // skillManager.learnSkill("Bigger Weapon");
 
-        // copy weapons from allWeapons to weapons
+        //copy weapons from allWeapons to weapons
         weapons = new GameObject[allWeapons.Length];
         for (int i = 0; i < allWeapons.Length; i++)
         {
-            weapons[i] = allWeapons[i];
+            weapons[i] = Instantiate(allWeapons[i]);
         }
     }
 
@@ -75,7 +88,7 @@ public class ShipController : MonoBehaviour
             CycleWeapon(-1); // Scroll down
         }
 
-
+        if (weapons.Length == 0) return;
         float attackRate = 1f / (weapons[currentWeaponIndex].GetComponent<WeaponController>().attackSpeed + stats.attackSpeed);
         if (Input.GetMouseButton(0) && timeSinceLastShot >= attackRate)
         {
@@ -92,6 +105,16 @@ public class ShipController : MonoBehaviour
 
     private void shoot()
     {
-        weapons[currentWeaponIndex].GetComponent<WeaponController>().shoot(new Vector3(transform.position.x, transform.position.y, 0), transform.rotation);
+        float halfHeight = GetComponent<Renderer>().bounds.extents.y;
+
+        Vector3 shootingPosition = transform.position + (transform.up * halfHeight * 1.3f);
+
+        weapons[currentWeaponIndex].GetComponent<WeaponController>().shoot(shootingPosition, transform.rotation);
+    }
+
+
+    public void learnSkill(string skillName)
+    {
+        stats.learnSkill(skillName);
     }
 }

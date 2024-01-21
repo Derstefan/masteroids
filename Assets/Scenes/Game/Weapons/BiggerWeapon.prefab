@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSpeed: 6
   damage: 18
-  lifeTime: 2
-  projectileSpeed: 100
+  lifeTime: 9
+  projectileSpeed: 200
   projectilePrefab: {fileID: 2880619533236538954, guid: 14335fd913f115941945e85bc575f8b6, type: 3}

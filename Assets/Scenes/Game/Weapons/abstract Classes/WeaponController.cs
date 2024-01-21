@@ -9,7 +9,13 @@ public abstract class WeaponController : MonoBehaviour
     public float projectileSpeed;
     public GameObject projectilePrefab;
 
+    public bool activated = false;
+
     abstract public void shoot(Vector3 pos, Quaternion direction);
+
+
+    abstract public Skill[] getWeaponSkills();
+    abstract public void learnSkill(string skillName);
 
     public void createShoot(Vector3 pos, Quaternion direction)
     {

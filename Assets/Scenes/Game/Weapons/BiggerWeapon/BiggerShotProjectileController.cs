@@ -11,7 +11,7 @@ public class BiggerShotProjectileController : ProjectileController
 
     public override void Explode()
     {
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D c)

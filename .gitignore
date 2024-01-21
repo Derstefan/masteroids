@@ -13,6 +13,7 @@
 *.userprefs
 *.pidb
 *.booproj
+.vs/
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -32,3 +33,5 @@ Desktop.ini
 # Linux
 [Tt]humbs.db
 *.log
+
+

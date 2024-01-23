@@ -174,6 +174,8 @@ public class ShipController : MonoBehaviour
     public void incrementExp()
     {
         shipStats.exp++;
+        gameController.RaiseHighscore();
+
         if (shipStats.exp >= shipStats.expToNextLvl)
         {
             lvl++;

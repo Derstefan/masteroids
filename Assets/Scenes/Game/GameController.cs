@@ -9,12 +9,15 @@ public class GameController : MonoBehaviour
 
     public GameObject expPrefab;
 
+    public GameMenuScript menu;
+
     // private int score;
-    private int hiscore;
+    private int _highscore;
+    public int highscore
+    {
+        get { return _highscore; }
+    }
     private int lives;
-
-
-
 
     private int asteroidCount = 0;
 
@@ -25,7 +28,7 @@ public class GameController : MonoBehaviour
         {
             lastSpawnTimes[i] = -99999f;
         }
-        hiscore = PlayerPrefs.GetInt("hiscore", 0);
+        SetHighscore(PlayerPrefs.GetInt("hiscore", 0));
         BeginGame();
     }
 
@@ -138,4 +141,15 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void SetHighscore(int value)
+    {
+        _highscore = value;
+        menu.SetHighScore(_highscore);
+    }
+
+    public void RaiseHighscore(int value = 1)
+    {
+        _highscore += value;
+        menu.SetHighScore(_highscore);
+    }
 }

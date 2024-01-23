@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 
 public class MenuScript : MonoBehaviour
 {
+
     private void OnEnable()
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
@@ -11,7 +12,7 @@ public class MenuScript : MonoBehaviour
         root.Q<Button>("start").clicked += playMatch;
         root.Q<Button>("options").clicked += generatorScene;
         root.Q<Button>("exit").clicked += exitGame;
-    }
+    }   
 
     private void playMatch()
     {
@@ -27,5 +28,5 @@ public class MenuScript : MonoBehaviour
     private void exitGame()
     {
         Application.Quit();
-    }
+    }    
 }

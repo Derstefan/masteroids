@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 7384851911272027815}
   - component: {fileID: 1587464806373998555}
   - component: {fileID: 6071842303519050972}
-  - component: {fileID: 8404953986554782819}
+  - component: {fileID: 6522729730172677074}
+  - component: {fileID: 4866865314930850032}
   m_Layer: 0
   m_Name: small aslteroid
   m_TagString: Asteroid
@@ -29,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8208719035873257249}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.6853688, y: 3.2893288, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4.1062, y: 2.853, z: 0}
+  m_LocalScale: {x: 1.1444108, y: 1.0964693, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,12 +78,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3546972898198670349, guid: 405f5b76e333ad84b99f5fb33571a56a, type: 3}
+  m_Sprite: {fileID: 6432030403884209959, guid: 96e59f4971bd74149920f15dd872e089, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.29, y: 1.03}
+  m_Size: {x: 0.71, y: 0.7}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -100,7 +101,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 40
+  m_Mass: 20
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -139,11 +140,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e47774bc2040dae498191e7e18d63645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroy: {fileID: 0}
-  smallAsteroid: {fileID: 0}
-  maxLife: 10
---- !u!58 &8404953986554782819
-CircleCollider2D:
+  spawnStartTimer: 0
+  spawnIntervall: 10
+  spawnAmount: 30
+  spawnAmountIncrease: 10
+  destroySound: {fileID: 0}
+  splitterObjects: {fileID: 0}
+  splitterAmountMin: 3
+  splitterAmountMax: 7
+  splitterforceMultiplier: 1.5
+  maxLife: 30
+  destructionScore: 5
+  singleHitScore: 1
+  spawnExp: 1
+--- !u!60 &6522729730172677074
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -177,4 +188,43 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.545
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.71, y: 0.7}
+    newSize: {x: 0.71, y: 0.7}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.25996962, y: 0.025963962}
+      - {x: 0.3075403, y: 0.12290212}
+      - {x: 0.22001112, y: 0.2635033}
+      - {x: 0.09786222, y: 0.21189032}
+      - {x: -0.019567931, y: 0.31882936}
+      - {x: -0.08431266, y: 0.26013887}
+      - {x: -0.25790587, y: 0.25109303}
+      - {x: -0.32712978, y: -0.05189827}
+      - {x: -0.24115923, y: -0.20024455}
+      - {x: -0.084649876, y: -0.2291972}
+      - {x: -0.023337042, y: -0.31778473}
+      - {x: 0.14150509, y: -0.30460554}
+      - {x: 0.31413203, y: -0.099730045}
+  m_UseDelaunayMesh: 0
+--- !u!114 &4866865314930850032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8208719035873257249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bea618e5b007b64ca593a20111a521d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipPrefab: {fileID: 0}
+  rotationForce: 5
+  forwardForce: 10

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -116,16 +117,81 @@ public class ShipController : MonoBehaviour
 
 
 
+    private Coroutine controlCoroutine;
+    private Coroutine timeSlowCoroutine;
+    private float timeSlowFactor = 0.5f;
+    private float timeSlowDuration = 2f;
+    private float smoothTime = 0.2f; // 70 ms in seconds
+
     void OnTriggerEnter2D(Collider2D c)
     {
-        if (c.gameObject.CompareTag("Asteroid") || c.gameObject.CompareTag("EnemyProjectile"))
+        if (c.gameObject.CompareTag("Asteroid") || c.gameObject.CompareTag("EnemyProjectile") || c.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("Ship hit");
-            // AudioSource.PlayClipAtPoint(crash, Camera.main.transform.position);
-            transform.position = new Vector3(0, 0, 0);
-            GetComponent<Rigidbody2D>().velocity = Vector3.zero; // Remove all velocity from the ship
-            gameController.DecrementLives();
+
+            // Stop the existing coroutines if they are running
+            if (controlCoroutine != null)
+            {
+                StopCoroutine(controlCoroutine);
+            }
+            if (timeSlowCoroutine != null)
+            {
+                StopCoroutine(timeSlowCoroutine);
+            }
+
+            // Set temporary the is trigger from polygon collider to false
+            GetComponent<PolygonCollider2D>().isTrigger = false;
+
+            // Start a new coroutine and store a reference to it
+            controlCoroutine = StartCoroutine(GiveControlOverShipAfterDelay(shipStats.falterDuration));
+
+            // Apply time slow
+            timeSlowCoroutine = StartCoroutine(TimeSlowCoroutine());
         }
+    }
+
+    public IEnumerator GiveControlOverShipAfterDelay(float delay)
+    {
+        // Wait for the specified delay
+        yield return new WaitForSeconds(delay);
+
+        // Enable the trigger back
+        GetComponent<PolygonCollider2D>().isTrigger = true;
+        // Set rotation velocity to 0
+        GetComponent<Rigidbody2D>().angularVelocity = 0f;
+
+        // Clear the coroutine reference
+        controlCoroutine = null;
+    }
+
+    public IEnumerator TimeSlowCoroutine()
+    {
+        float initialTimeScale = Time.timeScale;
+        float targetTimeScale = timeSlowFactor;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < smoothTime)
+        {
+            // Interpolate the time scale gradually
+            Time.timeScale = Mathf.Lerp(initialTimeScale, targetTimeScale, elapsedTime / smoothTime);
+
+            // Increment the elapsed time
+            elapsedTime += Time.fixedDeltaTime;
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        // Ensure the final time scale is set to the target
+        Time.timeScale = targetTimeScale;
+
+        // Wait for the specified duration
+        yield return new WaitForSeconds(timeSlowDuration);
+
+        // Reset time scale to normal
+        Time.timeScale = 1f;
+
+        // Clear the coroutine reference
+        timeSlowCoroutine = null;
     }
 
 
@@ -174,11 +240,13 @@ public class ShipController : MonoBehaviour
     public void incrementExp()
     {
         shipStats.exp++;
+        gameController.RaiseHighscore();
+
         if (shipStats.exp >= shipStats.expToNextLvl)
         {
             lvl++;
             shipStats.exp = 0;
-            shipStats.expToNextLvl = (int)(shipStats.expToNextLvl * 1.5);
+            shipStats.expToNextLvl = (int)(shipStats.expToNextLvl * 1.2);
 
             Debug.Log("Level up! next " + shipStats.expToNextLvl);
 

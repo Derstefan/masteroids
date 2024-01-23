@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 405f5b76e333ad84b99f5fb33571a56a
+guid: 860519864770e704c89694cdc333d33c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3546972898198670349
-    second: 527iajw2_0
+      213: -141944831421424096
+    second: Mittel3_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 527iajw2_0
+      name: Mittel3_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 24
-        width: 129
-        height: 103
+        x: 8
+        y: 6
+        width: 130
+        height: 142
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3f33ee611fe96cec0800000000000000
-      internalID: -3546972898198670349
+      spriteID: 02e5c698de5b70ef0800000000000000
+      internalID: -141944831421424096
       vertices: []
       indices: 
       edges: []
@@ -141,7 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      527iajw2_0: -3546972898198670349
+      Mittel3_0: -141944831421424096
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

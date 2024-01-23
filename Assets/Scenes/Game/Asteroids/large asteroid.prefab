@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6756433671946115149}
   - component: {fileID: 3965618985550029056}
   - component: {fileID: 2562766549089435388}
-  - component: {fileID: 466387624347149330}
+  - component: {fileID: 3063406916889289795}
   m_Layer: 0
   m_Name: large asteroid
   m_TagString: Asteroid
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922073036646296727}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4631463, y: 3.4653463, z: 0}
+  m_LocalPosition: {x: -1.455, y: 3.429, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1629456782014543795, guid: 249d0740ca91ed047bfc470dfa646e99, type: 3}
+  m_Sprite: {fileID: 7769957674217573404, guid: 08a8639d7fbcbba4b9d3da252922fee2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.35, y: 2.66}
+  m_Size: {x: 2.51, y: 2.67}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -139,17 +139,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e47774bc2040dae498191e7e18d63645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activated: 0
   spawnStartTimer: 0
   spawnIntervall: 20
   spawnAmount: 20
   spawnAmountIncrease: 3
   destroySound: {fileID: 0}
   splitterObjects: {fileID: 8208719035873257249, guid: 376b95b88ae079f4b9b7781f5124879a, type: 3}
-  splitterAmount: 3
+  splitterAmountMin: 3
+  splitterAmountMax: 7
+  splitterforceMultiplier: 1.5
   maxLife: 100
+  destructionScore: 5
+  singleHitScore: 1
   spawnExp: 1
---- !u!58 &466387624347149330
-CircleCollider2D:
+--- !u!60 &3063406916889289795
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -183,4 +188,23 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.1
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.51, y: 2.67}
+    newSize: {x: 2.51, y: 2.67}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.1157074, y: 1.3191929}
+      - {x: -0.9668659, y: 1.1979909}
+      - {x: -1.2303503, y: 0.05366257}
+      - {x: -0.99527633, y: -1.0400338}
+      - {x: 0.23413652, y: -1.3117458}
+      - {x: 1.0466251, y: -0.80901694}
+      - {x: 1.2412984, y: 0.16903138}
+      - {x: 0.81938946, y: 0.83169526}
+  m_UseDelaunayMesh: 0

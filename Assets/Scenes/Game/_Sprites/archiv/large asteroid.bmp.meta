@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e1b65e90cbc0f1742bd7430c9ce99228
+guid: 249d0740ca91ed047bfc470dfa646e99
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5562785595910269535
-    second: asteroid1_0
+      213: -1629456782014543795
+    second: jr288o2l_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -106,17 +106,29 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: asteroid1_0
+      name: jr288o2l_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 300
-        height: 300
+        x: 33
+        y: 12
+        width: 235
+        height: 266
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +136,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1a5db1239f30dc2b0800000000000000
-      internalID: -5562785595910269535
+      spriteID: d480c23a0b10369e0800000000000000
+      internalID: -1629456782014543795
       vertices: []
       indices: 
       edges: []
@@ -140,7 +152,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      jr288o2l_0: -1629456782014543795
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

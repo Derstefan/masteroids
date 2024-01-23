@@ -9,12 +9,16 @@ public class GameController : MonoBehaviour
 
     public GameObject expPrefab;
 
+    [Header("Events")]
+    public GameEvent OnScoreChanged;
+
     // private int score;
-    private int hiscore;
+    private int _highscore;
+    public int highscore
+    {
+        get { return _highscore; }
+    }
     private int lives;
-
-
-
 
     private int asteroidCount = 0;
 
@@ -25,7 +29,7 @@ public class GameController : MonoBehaviour
         {
             lastSpawnTimes[i] = -99999f;
         }
-        hiscore = PlayerPrefs.GetInt("hiscore", 0);
+        SetHighscore(PlayerPrefs.GetInt("hiscore", 0));
         BeginGame();
     }
 
@@ -99,17 +103,40 @@ public class GameController : MonoBehaviour
     public GameObject spawnAsteroid(GameObject prefab, Vector3 pos, Quaternion rot)
     {
         asteroidCount++;
-        return Instantiate(prefab, pos, rot);
+        GameObject asteroid = Instantiate(prefab, pos, rot);
+        asteroid.GetComponent<AsteroidController>().activate();
+        return asteroid;
     }
 
     public void destroyAsteroid(GameObject asteroid)
     {
-        if (asteroid.GetComponent<AsteroidController>().spawnExp)
+        int num = asteroid.GetComponent<AsteroidController>().spawnExp;
+        float maxOffset = 0.2f;
+
+        if (Random.Range(0, 100) < 5)
         {
-            Instantiate(expPrefab, asteroid.transform.position, Quaternion.identity);
+            maxOffset += 0.1f;
+            num += 7;
         }
+        for (int i = 0; i < num; i++)
+        {
+            Vector3 randomOffset = new Vector3(Random.Range(-maxOffset, maxOffset), Random.Range(-maxOffset, maxOffset), 0f);
+            Instantiate(expPrefab, asteroid.transform.position + randomOffset, Quaternion.identity);
+        }
+
+
+
+        // if its skiping asteroid
+        SpikeController sc = asteroid.GetComponent<SpikeController>();
+        if (asteroid.GetComponent<SpikeController>() != null)
+        {
+            sc.CreateAndRotateSpikes();
+        }
+
+        //destroy asteroid
         asteroidCount--;
         Destroy(asteroid);
+
 
     }
 
@@ -138,4 +165,15 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void SetHighscore(int value)
+    {
+        _highscore = value;
+        OnScoreChanged.Raise();
+    }
+
+    public void RaiseHighscore(int value = 1)
+    {
+        _highscore += value;
+        OnScoreChanged.Raise();
+    }
 }

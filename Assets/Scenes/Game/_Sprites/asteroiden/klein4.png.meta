@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: cc447f5dd22fe364f99bfa2f5a958004
+guid: dad13f1a3a21e364581deb4bf4f0cee2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3547462742315766670
-    second: an1vn96l_0
+      213: -5892303291476956142
+    second: klein4_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: an1vn96l_0
+      name: klein4_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 1
-        width: 56
-        height: 73
+        x: 1
+        y: 0
+        width: 77
+        height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e831aa1a19e1b3130800000000000000
-      internalID: 3547462742315766670
+      spriteID: 21ca6aa00655a3ea0800000000000000
+      internalID: -5892303291476956142
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      an1vn96l_0: 3547462742315766670
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

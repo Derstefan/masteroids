@@ -14,4 +14,5 @@ public class Config
 
     // asteroid
     public static float blinkDuration = 0.05f;
+
 }

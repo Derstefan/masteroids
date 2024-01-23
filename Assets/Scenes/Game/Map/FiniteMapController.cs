@@ -5,6 +5,10 @@ public class FiniteMapController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.GetComponent<AsteroidController>() != null)
+        {
+            if (!gameObject.GetComponent<AsteroidController>().activated) return;
+        }
 
         // Teleport the game object
         if (transform.position.x > MapConfig.XMax)

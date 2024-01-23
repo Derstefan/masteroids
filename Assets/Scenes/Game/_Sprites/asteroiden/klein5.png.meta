@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f183b2ce7efa8064ab0d5b68b2c2126d
+guid: 2a546e95e24bb4d478a36cba2e4ecf6e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3282610866405107179
-    second: ship2_0
+      213: -5916218848671425630
+    second: klein5_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -110,12 +110,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ship2_0
+      name: klein5_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 75
+        x: 2
+        y: 2
+        width: 74
         height: 75
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 51a161c1fc2d172d0800000000000000
-      internalID: -3282610866405107179
+      spriteID: 2ab18777d4e55eda0800000000000000
+      internalID: -5916218848671425630
       vertices: []
       indices: 
       edges: []

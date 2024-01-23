@@ -18,12 +18,15 @@ public class GameMenuScript : MonoBehaviour
     private void Start()
     {
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-        SetHighScore();
+        //SetHighScore();
     }
 
-    public void SetHighScore()
+    public void SetHighScore(Component sender, object data)
     {
-        HighscoreUI.text = $"SCORE: {gameController.highscore}";
+        if(data is int)
+        {
+            HighscoreUI.text = $"SCORE: {(int) data}";
+        }
     }
 
     private void LoadMenu()

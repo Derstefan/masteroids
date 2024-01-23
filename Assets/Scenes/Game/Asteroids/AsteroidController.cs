@@ -14,6 +14,8 @@ public class AsteroidController : MonoBehaviour
     public GameObject splitterObjects;
     public int splitterAmount = 3;
     public float maxLife = 100f;
+    public int destructionScore = 5;
+    public int singleHitScore = 1;
 
     public bool spawnExp = true;
     private float currentLife;
@@ -44,11 +46,13 @@ public class AsteroidController : MonoBehaviour
             float demage = c.gameObject.GetComponent<ProjectileController>().demage;
             StartCoroutine(SmoothBlink());
             currentLife -= demage;
+            GC.RaiseHighscore(singleHitScore);
 
             if (currentLife < 0)
             {
                 if (gameObject == null) return;
                 GC.destroyAsteroid(gameObject);
+                GC.RaiseHighscore(destructionScore);
                 if (splitterObjects != null)
                 {
                     spawnSmallerAsteroids(splitterAmount);

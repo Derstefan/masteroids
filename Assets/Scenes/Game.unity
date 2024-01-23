@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 60530822}
   - component: {fileID: 60530821}
   - component: {fileID: 60530823}
+  - component: {fileID: 60530824}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -181,6 +182,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4529a24a5c9f946be38dd6105342e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &60530824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60530820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb667b43eb503a44ac354a285e22b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: b48fccd0b674a804888536fe27bb6057, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 60530823}
+        m_TargetAssemblyTypeName: GameMenuScript, Assembly-CSharp
+        m_MethodName: SetHighScore
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,6 +665,8 @@ MonoBehaviour:
   lastSpawnTimes: []
   ship: {fileID: 1964851264}
   expPrefab: {fileID: 920537872}
+  menu: {fileID: 60530823}
+  OnScoreChanged: {fileID: 11400000, guid: b48fccd0b674a804888536fe27bb6057, type: 2}
 --- !u!1 &1964851264
 GameObject:
   m_ObjectHideFlags: 0

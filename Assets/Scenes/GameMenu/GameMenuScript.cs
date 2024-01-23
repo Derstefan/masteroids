@@ -12,6 +12,7 @@ public class GameMenuScript : MonoBehaviour
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
         HighscoreUI = root.Q<Label>("score");
+        root.Q<Button>("menu").clicked += LoadMenu;
     }
 
     private void Start()

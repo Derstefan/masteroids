@@ -9,7 +9,8 @@ public class GameController : MonoBehaviour
 
     public GameObject expPrefab;
 
-    public GameMenuScript menu;
+    [Header("Events")]
+    public GameEvent OnScoreChanged;
 
     // private int score;
     private int _highscore;
@@ -144,12 +145,12 @@ public class GameController : MonoBehaviour
     public void SetHighscore(int value)
     {
         _highscore = value;
-        menu.SetHighScore(_highscore);
+        OnScoreChanged.Raise();
     }
 
     public void RaiseHighscore(int value = 1)
     {
         _highscore += value;
-        menu.SetHighScore(_highscore);
+        OnScoreChanged.Raise();
     }
 }

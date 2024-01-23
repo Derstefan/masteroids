@@ -5,13 +5,13 @@ using UnityEngine.UIElements;
 public class GameMenuScript : MonoBehaviour
 {
     private GameController gameController;
-    private Label ui_highscore;
+    private Label HighscoreUI;
 
     private void OnEnable()
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
-        ui_highscore = root.Q<Label>("score");
+        HighscoreUI = root.Q<Label>("score");
     }
 
     private void Start()
@@ -22,7 +22,7 @@ public class GameMenuScript : MonoBehaviour
 
     public void SetHighScore()
     {
-        ui_highscore.text = $"SCORE: {gameController.highscore}";
+        HighscoreUI.text = $"SCORE: {gameController.highscore}";
     }
 
     private void LoadMenu()

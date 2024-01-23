@@ -145,12 +145,12 @@ public class GameController : MonoBehaviour
     public void SetHighscore(int value)
     {
         _highscore = value;
-        OnScoreChanged.Raise();
+        OnScoreChanged.Raise(this, _highscore);
     }
 
     public void RaiseHighscore(int value = 1)
     {
         _highscore += value;
-        OnScoreChanged.Raise();
+        OnScoreChanged.Raise(this, _highscore);
     }
 }

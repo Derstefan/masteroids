@@ -15,8 +15,10 @@ public class ShipStats
 
     public float attackSpeed = 0.8f;
 
+    public float falterDuration = 1.6f; // duration to get control back after hit with asteroid
 
 
+    public float collectMinDistance = 5f;
 
     public Skill[] getSkills()
     {

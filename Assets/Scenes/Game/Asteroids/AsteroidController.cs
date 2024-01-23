@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class AsteroidController : MonoBehaviour
 {
+    public bool activated = true;
 
     public float spawnStartTimer = 0f;
     public float spawnIntervall = 10f;
@@ -12,13 +13,17 @@ public class AsteroidController : MonoBehaviour
 
     public AudioClip destroySound;
     public GameObject splitterObjects;
-    public int splitterAmount = 3;
+    public int splitterAmountMin = 3;
+    public int splitterAmountMax = 7;
+    public float splitterforceMultiplier = 1.5f;
+
     public float maxLife = 100f;
     public int destructionScore = 5;
     public int singleHitScore = 1;
 
-    public bool spawnExp = true;
+    public int spawnExp = 1;
     private float currentLife;
+
 
 
 
@@ -26,15 +31,31 @@ public class AsteroidController : MonoBehaviour
 
     void Start()
     {
-
         GC = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         currentLife = maxLife;
-        GetComponent<Rigidbody2D>()
-            .AddForce(transform.up * Random.Range(-50.0f, 150.0f));
-        GetComponent<Rigidbody2D>()
-            .angularVelocity = Random.Range(-0.0f, 90.0f);
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+        if (!activated)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = 0f;
+            rb.isKinematic = true;
+
+        }
+
+        rb.AddForce(transform.up * Random.Range(-50.0f, 150.0f));
+        rb.angularVelocity = Random.Range(-0.0f, 90.0f);
 
     }
+
+    public void activate()
+    {
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        activated = true;
+        rb.isKinematic = false;
+    }
+
+    private bool isSpawning = false;
 
 
     void OnCollisionEnter2D(Collision2D c)
@@ -50,12 +71,16 @@ public class AsteroidController : MonoBehaviour
 
             if (currentLife < 0)
             {
+
                 if (gameObject == null) return;
                 GC.destroyAsteroid(gameObject);
                 GC.RaiseHighscore(destructionScore);
-                if (splitterObjects != null)
+                if (splitterObjects != null && isSpawning == false)
                 {
-                    spawnSmallerAsteroids(splitterAmount);
+                    isSpawning = true;
+                    spawnSmallerAsteroids(Random.Range(splitterAmountMin, splitterAmountMax));
+                    isSpawning = false;
+
                 }
 
                 // Play a sound
@@ -76,14 +101,24 @@ public class AsteroidController : MonoBehaviour
         {
             float angle = i * 360f / numberOfAsteroids;
 
+            // Calculate a vector pointing away from the center
+            Vector3 direction = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0);
+
             GameObject splitterAsteroid = GC.spawnAsteroid(
                 splitterObjects,
-                transform.position + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0) * 0.5f,
+                transform.position + direction * 0.5f,
                 Quaternion.Euler(0, 0, angle));
 
             splitterAsteroid.GetComponent<Rigidbody2D>().velocity = velocity;
+
+            // Calculate a force direction away from the center
+            Vector2 forceDirection = direction;
+
+            splitterAsteroid.GetComponent<Rigidbody2D>()
+                .AddForce(forceDirection * Random.Range(150.0f * splitterforceMultiplier, 1650.0f * splitterforceMultiplier));
         }
     }
+
 
 
     private IEnumerator SmoothBlink()

@@ -11,7 +11,9 @@ public class BiggerShotProjectileController : ProjectileController
 
     public override void Explode()
     {
-        // Destroy(gameObject);
+        // add explosion force
+        Utils.AddExplosionForce(GetComponent<Rigidbody2D>(), 1000f, transform.position, 10f, 0.0F, ForceMode2D.Impulse);
+        Destroy(gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D c)
@@ -29,4 +31,7 @@ public class BiggerShotProjectileController : ProjectileController
             Explode();
         }
     }
+
+
+
 }

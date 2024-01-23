@@ -103,17 +103,40 @@ public class GameController : MonoBehaviour
     public GameObject spawnAsteroid(GameObject prefab, Vector3 pos, Quaternion rot)
     {
         asteroidCount++;
-        return Instantiate(prefab, pos, rot);
+        GameObject asteroid = Instantiate(prefab, pos, rot);
+        asteroid.GetComponent<AsteroidController>().activate();
+        return asteroid;
     }
 
     public void destroyAsteroid(GameObject asteroid)
     {
-        if (asteroid.GetComponent<AsteroidController>().spawnExp)
+        int num = asteroid.GetComponent<AsteroidController>().spawnExp;
+        float maxOffset = 0.2f;
+
+        if (Random.Range(0, 100) < 5)
         {
-            Instantiate(expPrefab, asteroid.transform.position, Quaternion.identity);
+            maxOffset += 0.1f;
+            num += 7;
         }
+        for (int i = 0; i < num; i++)
+        {
+            Vector3 randomOffset = new Vector3(Random.Range(-maxOffset, maxOffset), Random.Range(-maxOffset, maxOffset), 0f);
+            Instantiate(expPrefab, asteroid.transform.position + randomOffset, Quaternion.identity);
+        }
+
+
+
+        // if its skiping asteroid
+        SpikeController sc = asteroid.GetComponent<SpikeController>();
+        if (asteroid.GetComponent<SpikeController>() != null)
+        {
+            sc.CreateAndRotateSpikes();
+        }
+
+        //destroy asteroid
         asteroidCount--;
         Destroy(asteroid);
+
 
     }
 

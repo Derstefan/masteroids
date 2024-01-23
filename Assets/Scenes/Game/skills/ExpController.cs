@@ -34,6 +34,7 @@ public class ExpController : MonoBehaviour
 
     void Collect()
     {
+
         Destroy(gameObject);
         ship.GetComponent<ShipController>().incrementExp();
     }

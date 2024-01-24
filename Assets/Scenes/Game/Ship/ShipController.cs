@@ -263,6 +263,7 @@ public class ShipController : MonoBehaviour
             PauseGame();
             //Debug.Log("Learned skills: " + skills[0].name + " " + skills[1].name + " " + skills[2].name);
             OnLevelUp.Raise(this, skills);
+            Debug.Log("Leveling event raised");
             //learn(skills[0].name);
             //Debug.Log("Learnable skills: " + skillManager.getAllLearnableSkills());
         }

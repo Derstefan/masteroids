@@ -7,11 +7,13 @@ using System;
 
 public class GameMenuScript : MonoBehaviour
 {
-    private GameController gameController;
-    private Label HighscoreUI;
-    private VisualElement ProgressBar;
+    //VisualElements
+    private VisualElement HUD;
+    private VisualElement levelMenu;
+    private Label highscoreUI;
+    private VisualElement progressBar;
+
     private List<Button> buttons = new List<Button>(); 
-    private int selectableSkills = 3;
 
     [Header("Events")]
     public GameEvent OnSkillSelected;
@@ -19,30 +21,37 @@ public class GameMenuScript : MonoBehaviour
     private void OnEnable()
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
+        SetUpHUD(root);        
+        SetUpLevelMenu(root);        
+    }
 
-        HighscoreUI = root.Q<Label>("score");
-        ProgressBar = root.Q<VisualElement>("Foreground");
+    private void SetUpHUD(VisualElement root)
+    {
+        HUD = root.Q<VisualElement>("HUD");
+        highscoreUI = root.Q<Label>("score");
+        progressBar = root.Q<VisualElement>("Foreground");
         root.Q<Button>("menu").clicked += LoadMenu;
-        SetUpLevelMenu(root);
-        
     }
 
     private void SetUpLevelMenu(VisualElement root)
     {
-        for(int i = 0; i < selectableSkills; i++)
+        levelMenu = root.Q<VisualElement>("LevelUp_Menu");
+
+        foreach (VisualElement element in levelMenu.hierarchy.Children())
         {
-            Button button = new Button();
-            button = root.Q<Button>("Skill_" + i.ToString());
-            Debug.Log("initialized " + button.text);
-            button.visible = false;
-            buttons.Add(button);
+            if(element is Button)
+            {
+                buttons.Add((Button)element);
+            }
         }
 
         foreach(Button button in buttons)
         {
             button.RegisterCallback<ClickEvent>(GetSkillFromButton);
             Debug.Log("Click event registered " + button.text);
-        }        
+        }
+
+        SetLevelMenuInactive();
     }
 
     private void GetSkillFromButton(ClickEvent evt)
@@ -54,16 +63,11 @@ public class GameMenuScript : MonoBehaviour
         SetLevelMenuInactive();
     }
 
-    private void Start()
-    {
-        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-    }
-
     public void SetHighScore(Component sender, object data)
     {
         if(data is int)
         {
-            HighscoreUI.text = $"SCORE: {(int) data}";
+            highscoreUI.text = $"SCORE: {(int) data}";
         }
     }
 
@@ -71,18 +75,21 @@ public class GameMenuScript : MonoBehaviour
     {
         if(data is float)
         {
-            ProgressBar.transform.scale = new Vector3((float) data, 1, 1);
+            progressBar.transform.scale = new Vector3((float) data, 1, 1);
         }
         
     }
 
     public void SetLevelMenuActive(Component sender, object data)
     {
-        if(data is Skill[])
+        if (data is Skill[])
         {
-            //Debug.Log("activates level menu");
+            //Show skill selection
+            levelMenu.style.display = DisplayStyle.Flex;            
             Skill[] wheapons = (Skill[])data;
+
             int i = 0;
+
             foreach(Button button in buttons)
             {
                 if(i < wheapons.Length)
@@ -91,23 +98,34 @@ public class GameMenuScript : MonoBehaviour
                     buttons[i].visible = true;
                     i++;
                 }
-            }            
-        }
+            }
+
+            //hide HUD
+            int number = 0;
+            foreach (VisualElement element in HUD.hierarchy.Children())
+            {
+                element.style.display = DisplayStyle.None;                
+            }
+        } 
     }
 
     public void SetLevelMenuInactive()
     {
-        /*
-        for (int i = 0; i < buttons.Length; i++)
-        {
-            buttons[i].visible = false;
-        }
-        */
-
+        // hide skill selection
         foreach(Button button in buttons)
         {
             button.visible = false;
         }
+
+        levelMenu.style.display = DisplayStyle.None;
+
+        // show HUD
+        foreach(VisualElement element in HUD.hierarchy.Children())
+        {
+            element.style.display = DisplayStyle.Flex;
+        }
+
+        Debug.Log("Level Menu inactive");
     }
 
     private void LoadMenu()

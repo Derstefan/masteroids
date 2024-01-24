@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4529a24a5c9f946be38dd6105342e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnSkillSelected: {fileID: 11400000, guid: 6fc293f384b9d6e45b64b6c6371c0062, type: 2}
 --- !u!114 &60530824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,13 +195,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb667b43eb503a44ac354a285e22b81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: b48fccd0b674a804888536fe27bb6057, type: 2}
+  gameEvents:
+  - {fileID: 11400000, guid: b48fccd0b674a804888536fe27bb6057, type: 2}
+  - {fileID: 11400000, guid: dbeee8e7aef865444bbd900c96556fda, type: 2}
+  - {fileID: 11400000, guid: 382df44480b9d34408374bee28ee877c, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 60530823}
         m_TargetAssemblyTypeName: GameMenuScript, Assembly-CSharp
         m_MethodName: SetHighScore
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 60530823}
+        m_TargetAssemblyTypeName: GameMenuScript, Assembly-CSharp
+        m_MethodName: SetProgress
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 60530823}
+        m_TargetAssemblyTypeName: GameMenuScript, Assembly-CSharp
+        m_MethodName: SetLevelMenuActive
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -489,6 +517,7 @@ GameObject:
   - component: {fileID: 301943382}
   - component: {fileID: 301943381}
   - component: {fileID: 301943380}
+  - component: {fileID: 301943386}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Ship
@@ -514,6 +543,8 @@ MonoBehaviour:
   - {fileID: 1319726078215399999, guid: d38653fc2c2100244851921a5157c431, type: 3}
   allWeapons: []
   weapons: []
+  OnProgressChanged: {fileID: 11400000, guid: dbeee8e7aef865444bbd900c96556fda, type: 2}
+  OnLevelUp: {fileID: 11400000, guid: 382df44480b9d34408374bee28ee877c, type: 2}
   lvl: 1
 --- !u!114 &301943381
 MonoBehaviour:
@@ -695,6 +726,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &301943386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301943379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb667b43eb503a44ac354a285e22b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: 6fc293f384b9d6e45b64b6c6371c0062, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 301943380}
+        m_TargetAssemblyTypeName: ShipController, Assembly-CSharp
+        m_MethodName: learn
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &375088599 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8208719035873257249, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}

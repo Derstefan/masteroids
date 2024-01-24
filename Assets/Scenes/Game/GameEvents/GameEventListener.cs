@@ -8,17 +8,25 @@ public class CustomGameEvent : UnityEvent<Component, object> { }
 
 public class GameEventListener : MonoBehaviour
 {
-    public GameEvent gameEvent;
+    public GameEvent[] gameEvents;
     public CustomGameEvent response;
 
     private void OnEnable()
     {
-        gameEvent.RegisterListener(this);
+        //gameEvent.RegisterListener(this);
+        foreach(GameEvent gameEvent in gameEvents)
+        {
+            gameEvent.RegisterListener(this);
+        }
     }
 
     private void OnDisable()
     {
-        gameEvent.UnregisterListener(this);
+        //gameEvent.UnregisterListener(this);
+        foreach (GameEvent gameEvent in gameEvents)
+        {
+            gameEvent.UnregisterListener(this);
+        }
     }
 
     public void OnEventRaised(Component sender, object data)

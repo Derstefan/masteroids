@@ -19,3 +19,35 @@
 .Default_Menu_Label {
     color: rgb(255, 255, 255);
 }
+
+.LevelUp_Button {
+    align-self: center;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-left-width: 4px;
+    border-right-width: 4px;
+    border-top-width: 4px;
+    border-bottom-width: 4px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    visibility: hidden;
+}
+
+.LevelUp_Button:hover {
+    scale: 1.1 1.1;
+}
+
+.LevelUp_Button:active {
+    color: rgb(125, 125, 125);
+}

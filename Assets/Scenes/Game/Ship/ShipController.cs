@@ -21,6 +21,9 @@ public class ShipController : MonoBehaviour
 
     private GameController gameController;
 
+    [Header("Events")]
+    public GameEvent OnProgressChanged;
+
 
     public int lvl = 1;
 
@@ -241,11 +244,13 @@ public class ShipController : MonoBehaviour
     {
         shipStats.exp++;
         gameController.RaiseHighscore();
+        OnProgressChanged.Raise(this, (float) shipStats.exp / (float) shipStats.expToNextLvl);
 
         if (shipStats.exp >= shipStats.expToNextLvl)
         {
             lvl++;
             shipStats.exp = 0;
+            OnProgressChanged.Raise(this, (float)shipStats.exp);
             shipStats.expToNextLvl = (int)(shipStats.expToNextLvl * 1.2);
 
             Debug.Log("Level up! next " + shipStats.expToNextLvl);

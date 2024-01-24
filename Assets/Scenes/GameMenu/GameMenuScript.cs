@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class GameMenuScript : MonoBehaviour
@@ -9,9 +10,8 @@ public class GameMenuScript : MonoBehaviour
     private GameController gameController;
     private Label HighscoreUI;
     private VisualElement ProgressBar;
-    private Button[] buttons; 
-    private Button leftOption;
-    private Button rightOption;
+    private List<Button> buttons = new List<Button>(); 
+    private int selectableSkills = 3;
 
     [Header("Events")]
     public GameEvent OnSkillSelected;
@@ -29,13 +29,19 @@ public class GameMenuScript : MonoBehaviour
 
     private void SetUpLevelMenu(VisualElement root)
     {
-        leftOption = root.Q<Button>("Left_Option");
-        rightOption = root.Q<Button>("Right_Option");
-        buttons = new[] { leftOption, rightOption };
+        for(int i = 0; i < selectableSkills; i++)
+        {
+            Button button = new Button();
+            button = root.Q<Button>("Skill_" + i.ToString());
+            Debug.Log("initialized " + button.text);
+            button.visible = false;
+            buttons.Add(button);
+        }
 
         foreach(Button button in buttons)
         {
             button.RegisterCallback<ClickEvent>(GetSkillFromButton);
+            Debug.Log("Click event registered " + button.text);
         }        
     }
 
@@ -43,7 +49,7 @@ public class GameMenuScript : MonoBehaviour
     {
         Button temp = evt.currentTarget as Button;
         string skill = temp.text;
-        Debug.Log("Learn skill " + skill);
+        Debug.Log("Learn skill cklicked " + skill);
         OnSkillSelected.Raise(this, skill);
         SetLevelMenuInactive();
     }
@@ -71,26 +77,36 @@ public class GameMenuScript : MonoBehaviour
     }
 
     public void SetLevelMenuActive(Component sender, object data)
-    {       
+    {
         if(data is Skill[])
         {
+            //Debug.Log("activates level menu");
             Skill[] wheapons = (Skill[])data;
-            for (int i = 0; i < buttons.Length; i++)
+            int i = 0;
+            foreach(Button button in buttons)
             {
-                buttons[i].text = wheapons[i].name;
-                buttons[i].visible = true;
-            }
+                if(i < wheapons.Length)
+                {
+                    button.text = wheapons[i].name;
+                    buttons[i].visible = true;
+                    i++;
+                }
+            }            
         }
-
-       
-
     }
 
     public void SetLevelMenuInactive()
     {
+        /*
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].visible = false;
+        }
+        */
+
+        foreach(Button button in buttons)
+        {
+            button.visible = false;
         }
     }
 

@@ -1,8 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Scenes/GameMenu/Menu_Style.uss?fileID=7433441132597879392&amp;guid=61840be7cb364c242ab730a043a7b6a1&amp;type=3#Menu_Style" />
     <ui:VisualElement name="LevelUp_Menu" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); -unity-font-definition: url(&apos;project://database/Assets/Fonts/PIXELSPLITTER-BOLD.TTF?fileID=12800000&amp;guid=b7943e2c695382645ab2901473b85bed&amp;type=3#PIXELSPLITTER-BOLD&apos;); justify-content: center; align-self: stretch; align-items: center; visibility: visible; flex-direction: row; transform-origin: center;">
-        <ui:Button text="LEFT OPTION" display-tooltip-when-elided="true" name="Left_Option" class="LevelUp_Button" style="visibility: hidden;" />
-        <ui:Button text="RIGHT OPTION" display-tooltip-when-elided="true" name="Right_Option" class="LevelUp_Button" />
+        <ui:Button text="SKILL 1" display-tooltip-when-elided="true" name="Skill_0" class="LevelUp_Button" style="visibility: hidden;" />
+        <ui:Button text="SKILL 2" display-tooltip-when-elided="true" name="Skill_1" class="LevelUp_Button" style="visibility: hidden;" />
+        <ui:Button text="SKILL 3" display-tooltip-when-elided="true" name="Skill_2" class="LevelUp_Button" style="visibility: hidden;" />
     </ui:VisualElement>
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: flex-start; flex-direction: row; flex-wrap: nowrap; align-self: auto; position: absolute; opacity: 1; visibility: visible;">
         <ui:VisualElement name="Status" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); -unity-font-definition: url(&apos;project://database/Assets/Fonts/PIXELSPLITTER-BOLD.TTF?fileID=12800000&amp;guid=b7943e2c695382645ab2901473b85bed&amp;type=3#PIXELSPLITTER-BOLD&apos;); justify-content: flex-start; align-self: flex-start; align-items: flex-start;">

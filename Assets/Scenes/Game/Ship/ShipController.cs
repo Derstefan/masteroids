@@ -23,6 +23,7 @@ public class ShipController : MonoBehaviour
 
     [Header("Events")]
     public GameEvent OnProgressChanged;
+    public GameEvent OnLevelUp;
 
 
     public int lvl = 1;
@@ -55,7 +56,7 @@ public class ShipController : MonoBehaviour
             skillManager.addWeaponSkills(weapon.GetComponent<WeaponController>().getWeaponSkills());
         }
         // startSkills
-        learn("Simple Weapon");
+        learn(this, "Simple Weapon");
 
     }
 
@@ -70,12 +71,15 @@ public class ShipController : MonoBehaviour
         }
     }
 
-    public void learn(string skillName)
+    public void learn(Component sender, object data)
     {
-
-        skillManager.learnSkill(skillName);
-        checkUnlockedWeapons();
-        ResumeGame();
+        if(data is string)
+        {
+            skillManager.learnSkill((string) data);
+            Debug.Log("Learn skill: " + data);
+            checkUnlockedWeapons();
+            ResumeGame();
+        }        
     }
 
     public Skill[] getRandomLearnableSkills(int amount)
@@ -258,7 +262,8 @@ public class ShipController : MonoBehaviour
             Skill[] skills = getRandomLearnableSkills(3);
             PauseGame();
             //Debug.Log("Learned skills: " + skills[0].name + " " + skills[1].name + " " + skills[2].name);
-            learn(skills[0].name);
+            OnLevelUp.Raise(this, skills);
+            //learn(skills[0].name);
             //Debug.Log("Learnable skills: " + skillManager.getAllLearnableSkills());
         }
     }

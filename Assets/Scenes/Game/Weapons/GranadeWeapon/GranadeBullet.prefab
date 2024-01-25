@@ -178,10 +178,9 @@ MonoBehaviour:
   demage: 3
   lifeTime: 8
   force: 400
-  explosionScale: 7
   explosionColor: {r: 1, g: 0.64, b: 0, a: 1}
   explosionDuration: 0.05
   explosionForce: 100
-  explosionRadius: 6
+  explosionRadius: 3
   explosionDamage: 15
-  friction: 0.3
+  friction: 0.5

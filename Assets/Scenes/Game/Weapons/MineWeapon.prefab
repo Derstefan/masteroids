@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3747494231573465165}
-  - component: {fileID: 6800289197860478404}
+  - component: {fileID: 7116823679446978800}
   m_Layer: 0
   m_Name: MineWeapon
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6800289197860478404
+--- !u!114 &7116823679446978800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a74b050bd974b419bdef4dbc3b1401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 0.1
+  attackSpeed: 0.4
   damage: 0
-  lifeTime: 10
-  projectileSpeed: 0
+  lifeTime: 4
+  projectileSpeed: 20
   projectilePrefab: {fileID: 2880619533236538954, guid: aa09a194e37baec458c7faef99c9e080, type: 3}
   activated: 0
+  explosionRadius: 7
+  explosionDamage: 15

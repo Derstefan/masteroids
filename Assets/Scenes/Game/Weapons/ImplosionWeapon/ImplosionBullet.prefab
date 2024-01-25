@@ -182,6 +182,6 @@ MonoBehaviour:
   explosionColor: {r: 0.5998417, g: 0.1745283, b: 1, a: 1}
   explosionDuration: 0.05
   explosionForce: 100
-  explosionRadius: 10
+  explosionRadius: 3
   explosionDamage: 4
   friction: 0.5

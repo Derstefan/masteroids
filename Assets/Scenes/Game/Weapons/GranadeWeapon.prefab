@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f085dd3abef40a40a5f12afdac0e7ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 0.1
-  damage: 3
-  lifeTime: 3
+  attackSpeed: 0.4
+  damage: 0
+  lifeTime: 1.5
   projectileSpeed: 100
   projectilePrefab: {fileID: 2880619533236538954, guid: f8177858755b8f54e8a7f39e93edf9d5, type: 3}
   activated: 0
+  explosionRadius: 5
+  explosionDamage: 15

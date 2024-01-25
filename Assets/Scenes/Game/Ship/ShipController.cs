@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShipController : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class ShipController : MonoBehaviour
 
     private int currentWeaponIndex = 0;
 
-    private float timeSinceLastShot = 0f;
+    private float timeSinceLastShot = 99f;
 
     private GameController gameController;
 
@@ -31,6 +32,8 @@ public class ShipController : MonoBehaviour
     private SkillManager skillManager;
     [HideInInspector]
     public ShipStats shipStats;
+
+    private bool gameOver = false;
 
     void Start()
     {
@@ -130,12 +133,31 @@ public class ShipController : MonoBehaviour
 
         if (shipStats.currentHealth <= 0)
         {
-            Debug.Log(" gameController.gameOver()");
+            gameOver = true;
+            StartCoroutine(ShakeScreen(1f, 1f));
+            StartCoroutine(gotToMainManu(0.8f));
+
         }
         else
         {
             StartCoroutine(ShakeScreen(0.1f, 0.1f)); // Adjust duration and intensity as needed
         }
+    }
+
+
+
+
+    public void doHeal(float amount)
+    {
+        shipStats.currentHealth += amount;
+        float h = shipStats.currentHealth / shipStats.maxHealth;
+        GetComponent<SpriteRenderer>().color = new Color(1f, h, h);
+    }
+
+    IEnumerator gotToMainManu(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        SceneManager.LoadScene("menu");
     }
 
     IEnumerator ShakeScreen(float duration, float intensity)
@@ -247,11 +269,15 @@ public class ShipController : MonoBehaviour
         float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
         if (scrollWheel > 0f)
         {
-            CycleWeapon(1); // Scroll up
+            CycleWeapon(1);
+            timeSinceLastShot = 99f;
+
         }
         else if (scrollWheel < 0f)
         {
-            CycleWeapon(-1); // Scroll down
+            CycleWeapon(-1);
+            timeSinceLastShot = 99f;
+
         }
 
         if (weapons.Length == 0) throw new System.Exception("No weapons available");
@@ -275,7 +301,8 @@ public class ShipController : MonoBehaviour
         float halfHeight = GetComponent<Renderer>().bounds.extents.y;
 
         Vector3 shootingPosition = transform.position + (transform.up * halfHeight * 1.3f);
-
+        if (weapons[currentWeaponIndex] == null) throw new System.Exception("No weapon available");
+        if (weapons[currentWeaponIndex].GetComponent<WeaponController>() == null) throw new System.Exception("No weapon controller available");
         weapons[currentWeaponIndex].GetComponent<WeaponController>().shoot(shootingPosition, transform.rotation);
     }
 

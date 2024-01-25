@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3747494231573465165}
-  - component: {fileID: 6231047096386290041}
+  - component: {fileID: 948806137614509448}
   m_Layer: 0
-  m_Name: ReboundWeapon
+  m_Name: BounceWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6231047096386290041
+--- !u!114 &948806137614509448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,12 +41,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1319726078215399999}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f085dd3abef40a40a5f12afdac0e7ad, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7de78741de24545931a2d119083674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackSpeed: 3
-  damage: 3
-  lifeTime: 5
-  projectileSpeed: 100
-  projectilePrefab: {fileID: 2880619533236538954, guid: f8177858755b8f54e8a7f39e93edf9d5, type: 3}
-  activated: 1
+  attackSpeed: 1
+  damage: 10
+  lifeTime: 6
+  projectileSpeed: 300
+  projectilePrefab: {fileID: 2880619533236538954, guid: 8d453babdb4b9d0488ad1235a8c6e6a9, type: 3}
+  activated: 0

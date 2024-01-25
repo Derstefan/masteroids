@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ReboundWeaponController : WeaponController
+public class BounceWeaponController : WeaponController
 {
     public override void shoot(Vector3 pos, Quaternion direction)
     {
@@ -11,10 +11,10 @@ public class ReboundWeaponController : WeaponController
     public override Skill[] getWeaponSkills()
     {
         return new Skill[]{
-            new UnlockSkill("Rebound Weapon", 0,null,this),
-            new LevelingSkill("Damage Rebound Weapon", 0, "Rebound Weapon",this),
-            new LevelingSkill("AttackSpeed Rebound Weapon", 0, "Rebound Weapon",this),
-            new LevelingSkill("Projectil Speed Rebound Weapon", 0, "Rebound Weapon",this),
+            new UnlockSkill("Bounce Weapon", 10,null,this),
+            new LevelingSkill("Damage Bigger Weapon", 0, "Bounce Weapon",this),
+            new LevelingSkill("AttackSpeed Bigger Weapon", 0, "Bounce Weapon",this),
+            new LevelingSkill("Projectil Speed Bigger Weapon", 0, "Damage Bounce Weapon",this),
 
             };
     }
@@ -24,16 +24,16 @@ public class ReboundWeaponController : WeaponController
     {
         switch (skillName)
         {
-            case "Rebound Weapon":
+            case "Bounce Weapon":
                 this.activated = true;
                 break;
-            case "Damage Rebound Weapon":
+            case "Damage Bounce Weapon":
                 this.damage += 10;
                 break;
-            case "AttackSpeed Rebound Weapon":
+            case "AttackSpeed Bounce Weapon":
                 this.attackSpeed -= 0.01f;
                 break;
-            case "Projectil Speed Rebound Weapon":
+            case "Projectil Speed Bounce Weapon":
                 this.projectileSpeed += 0.1f;
                 break;
             default:

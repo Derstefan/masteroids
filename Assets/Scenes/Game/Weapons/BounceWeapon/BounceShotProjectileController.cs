@@ -1,19 +1,21 @@
 using UnityEngine;
 
-public class ReboundShotProjectileController : ProjectileController
+public class BounceShotProjectileController : ProjectileController
 {
     public override void goProjectile()
     {
         Destroy(gameObject, lifeTime);
         GetComponent<Rigidbody2D>()
           .AddForce(transform.up * force);
+
+        //give also rotation force
+        GetComponent<Rigidbody2D>()
+          .AddTorque(20f);
     }
 
     public override void Explode()
     {
-        // add explosion force
-        Utils.AddExplosionForce(GetComponent<Rigidbody2D>(), 10000f, transform.position, 10f, 0.0F, ForceMode2D.Impulse);
-        // Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D c)

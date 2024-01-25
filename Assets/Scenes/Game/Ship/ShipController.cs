@@ -73,13 +73,13 @@ public class ShipController : MonoBehaviour
 
     public void learn(Component sender, object data)
     {
-        if(data is string)
+        if (data is string)
         {
-            skillManager.learnSkill((string) data);
+            skillManager.learnSkill((string)data);
             Debug.Log("Learn skill: " + data);
             checkUnlockedWeapons();
             ResumeGame();
-        }        
+        }
     }
 
     public Skill[] getRandomLearnableSkills(int amount)
@@ -122,13 +122,45 @@ public class ShipController : MonoBehaviour
         Camera.main.orthographicSize = Mathf.Lerp(Config.minZoom, Config.maxZoom, zoomFactor);
     }
 
+    public void doDamage(float amount)
+    {
+        shipStats.currentHealth -= amount;
+        float h = shipStats.currentHealth / shipStats.maxHealth;
+        GetComponent<SpriteRenderer>().color = new Color(1f, h, h);
 
+        if (shipStats.currentHealth <= 0)
+        {
+            Debug.Log(" gameController.gameOver()");
+        }
+        else
+        {
+            StartCoroutine(ShakeScreen(0.1f, 0.1f)); // Adjust duration and intensity as needed
+        }
+    }
+
+    IEnumerator ShakeScreen(float duration, float intensity)
+    {
+        Vector3 originalPosition = Camera.main.transform.position;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float x = originalPosition.x + Random.Range(-intensity, intensity);
+            float y = originalPosition.y + Random.Range(-intensity, intensity);
+            Camera.main.transform.position = new Vector3(x, y, originalPosition.z);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        Camera.main.transform.position = originalPosition;
+    }
 
     private Coroutine controlCoroutine;
     private Coroutine timeSlowCoroutine;
-    private float timeSlowFactor = 0.5f;
-    private float timeSlowDuration = 2f;
-    private float smoothTime = 0.2f; // 70 ms in seconds
+    private float timeSlowFactor = 0.9f;
+    private float timeSlowDuration = 1f;
+    private float smoothTime = 0.2f;
 
     void OnTriggerEnter2D(Collider2D c)
     {
@@ -136,12 +168,15 @@ public class ShipController : MonoBehaviour
         {
             Debug.Log("Ship hit");
 
+            doDamage(10);
+
+
             // Stop the existing coroutines if they are running
-            if (controlCoroutine != null)
+            if (controlCoroutine != null && Time.timeScale != 0)
             {
                 StopCoroutine(controlCoroutine);
             }
-            if (timeSlowCoroutine != null)
+            if (timeSlowCoroutine != null && Time.timeScale != 0)
             {
                 StopCoroutine(timeSlowCoroutine);
             }
@@ -248,7 +283,7 @@ public class ShipController : MonoBehaviour
     {
         shipStats.exp++;
         gameController.RaiseHighscore();
-        OnProgressChanged.Raise(this, (float) shipStats.exp / (float) shipStats.expToNextLvl);
+        OnProgressChanged.Raise(this, (float)shipStats.exp / (float)shipStats.expToNextLvl);
 
         if (shipStats.exp >= shipStats.expToNextLvl)
         {

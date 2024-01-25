@@ -6,7 +6,7 @@ public class SpikeController : MonoBehaviour
     public int numberOfSpikes = 7;
     public void CreateAndRotateSpikes()
     {
-        float angleIncrement = 360f / 7f; // Divide 360 degrees into 7 parts
+        float angleIncrement = 360f / numberOfSpikes; // Divide 360 degrees into 7 parts
 
         for (int i = 0; i < numberOfSpikes; i++)
         {

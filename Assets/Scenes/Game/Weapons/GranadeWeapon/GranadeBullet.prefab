@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6532164135033609080}
   - component: {fileID: 1786602220193425386}
   m_Layer: 0
-  m_Name: ReboundBullet
+  m_Name: GranadeBullet
   m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5450453373741938707, guid: f946b12b83e507147b765340a205774d, type: 3}
-  m_Color: {r: 0.46226418, g: 0.42083484, b: 0.42083484, a: 1}
+  m_Sprite: {fileID: 1613791582321722318, guid: 329676b38e43908419694a950d8803da, type: 3}
+  m_Color: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -161,8 +161,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.025
+  m_Offset: {x: -0.0002220869, y: 0}
+  m_Radius: 0.1567713
 --- !u!114 &1786602220193425386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,3 +178,10 @@ MonoBehaviour:
   demage: 3
   lifeTime: 8
   force: 400
+  explosionScale: 7
+  explosionColor: {r: 1, g: 0.64, b: 0, a: 1}
+  explosionDuration: 0.05
+  explosionForce: 100
+  explosionRadius: 6
+  explosionDamage: 15
+  friction: 0.3

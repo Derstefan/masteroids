@@ -13,8 +13,8 @@ public class SimpleWeaponController : WeaponController
     public override Skill[] getWeaponSkills()
     {
         return new Skill[] {
-        new UnlockSkill("Simple Weapon",0,null,this),
-        new LevelingSkill("Damage Simple Weapon",0,"Simple Weapon",this),
+        new UnlockSkill("Simple Weapon",0,null, this.sprite, this),
+        new LevelingSkill("Damage Simple Weapon",0,"Simple Weapon", this.sprite, this),
         };
 
     }

@@ -11,10 +11,10 @@ public class BiggerWeaponController : WeaponController
     public override Skill[] getWeaponSkills()
     {
         return new Skill[]{
-            new UnlockSkill("Bigger Weapon", 0,null,this),
-            new LevelingSkill("Damage Bigger Weapon", 0, "Bigger Weapon",this),
-            new LevelingSkill("AttackSpeed Bigger Weapon", 0, "Bigger Weapon",this),
-            new LevelingSkill("Projectil Speed Bigger Weapon", 0, "Damage Bigger Weapon",this),
+            new UnlockSkill("Bigger Weapon", 0,null, this.sprite, this),
+            new LevelingSkill("Damage Bigger Weapon", 0, "Bigger Weapon", this.sprite, this),
+            new LevelingSkill("AttackSpeed Bigger Weapon", 0, "Bigger Weapon", this.sprite, this),
+            new LevelingSkill("Projectil Speed Bigger Weapon", 0, "Damage Bigger Weapon", this.sprite, this),
 
             };
     }

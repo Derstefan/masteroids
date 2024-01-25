@@ -58,7 +58,6 @@ public class GameMenuScript : MonoBehaviour
     {
         Button temp = evt.currentTarget as Button;
         string skill = temp.text;
-        Debug.Log("Learn skill cklicked " + skill);
         OnSkillSelected.Raise(this, skill);
         SetLevelMenuInactive();
     }
@@ -85,6 +84,7 @@ public class GameMenuScript : MonoBehaviour
         if (data is Skill[])
         {
             //Show skill selection
+            //Debug.Log("Set level menu active");
             levelMenu.style.display = DisplayStyle.Flex;            
             Skill[] weapons = (Skill[])data;
 
@@ -95,13 +95,16 @@ public class GameMenuScript : MonoBehaviour
                 if(i < weapons.Length)
                 {
                     button.text = weapons[i].name;
-                    buttons[i].style.display = DisplayStyle.Flex;
+                    //Debug.Log(weapons[i].name);
+                    button.style.display = DisplayStyle.Flex;
+                    button[0].style.backgroundImage = new StyleBackground(weapons[i].sprite);
                     i++;
                 }
             }
 
+
+
             //hide HUD
-            int number = 0;
             foreach (VisualElement element in HUD.hierarchy.Children())
             {
                 element.style.display = DisplayStyle.None;                
@@ -125,7 +128,7 @@ public class GameMenuScript : MonoBehaviour
             element.style.display = DisplayStyle.Flex;
         }
 
-        Debug.Log("Level Menu inactive");
+        //Debug.Log("Level Menu inactive");
     }
 
     private void LoadMenu()

@@ -25,6 +25,12 @@ public class ShipController : MonoBehaviour
     public GameEvent OnProgressChanged;
     public GameEvent OnLevelUp;
 
+    [Header("Skill selection sprites")]
+    public Sprite rotationSpeed_sprite;
+    public Sprite speed_sprite;
+    public Sprite health_sprite;
+    public Sprite attackSpeed_sprite;
+
 
     public int lvl = 1;
 
@@ -32,13 +38,14 @@ public class ShipController : MonoBehaviour
     [HideInInspector]
     public ShipStats shipStats;
 
-    void Start()
+    void Awake()
     {
-        shipStats = new ShipStats();
-        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
-
+        shipStats = new ShipStats(rotationSpeed_sprite, speed_sprite, health_sprite, attackSpeed_sprite);
         init();
-
+    }
+    void Start()
+    {       
+        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();      
     }
 
     void init()
@@ -58,6 +65,12 @@ public class ShipController : MonoBehaviour
         // startSkills
         learn(this, "Simple Weapon");
 
+        /*
+        foreach(Skill skill in skillManager.allSkills)
+        {
+            Debug.Log(skill.name);
+        }
+        */
     }
 
     void checkUnlockedWeapons()
@@ -219,6 +232,8 @@ public class ShipController : MonoBehaviour
             CycleWeapon(-1); // Scroll down
         }
 
+        //Debug.Log("Shipstats attack " + shipStats.attackSpeed);
+
         if (weapons.Length == 0) throw new System.Exception("No weapons available");
         float attackRate = 1f / (weapons[currentWeaponIndex].GetComponent<WeaponController>().attackSpeed + shipStats.attackSpeed);
         if (Input.GetMouseButton(0) && timeSinceLastShot >= attackRate)
@@ -263,7 +278,7 @@ public class ShipController : MonoBehaviour
             PauseGame();
             //Debug.Log("Learned skills: " + skills[0].name + " " + skills[1].name + " " + skills[2].name);
             OnLevelUp.Raise(this, skills);
-            Debug.Log("Leveling event raised");
+           
             //learn(skills[0].name);
             //Debug.Log("Learnable skills: " + skillManager.getAllLearnableSkills());
         }

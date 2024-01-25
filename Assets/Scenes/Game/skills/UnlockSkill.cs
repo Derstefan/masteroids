@@ -1,17 +1,19 @@
-﻿public class UnlockSkill : Skill
+﻿using UnityEngine;
+
+public class UnlockSkill : Skill
 {
     public bool learned = false;
 
 
-    public UnlockSkill(string name, int minLevel, string requiredSkill) : base(name, minLevel, requiredSkill)
+    public UnlockSkill(string name, int minLevel, string requiredSkill, Sprite sprite ) : base(name, minLevel, requiredSkill, sprite)
     {
     }
 
-    public UnlockSkill(string name, int minLevel, string requiredSkill, WeaponController weaponController) : base(name, minLevel, requiredSkill, weaponController)
+    public UnlockSkill(string name, int minLevel, string requiredSkill, Sprite sprite, WeaponController weaponController) : base(name, minLevel, requiredSkill, sprite, weaponController)
     {
     }
 
-    public UnlockSkill(string name, int minLevel, string requiredSkill, ShipStats shipStats) : base(name, minLevel, requiredSkill, shipStats)
+    public UnlockSkill(string name, int minLevel, string requiredSkill, Sprite sprite, ShipStats shipStats) : base(name, minLevel, requiredSkill, sprite, shipStats)
     {
     }
 }

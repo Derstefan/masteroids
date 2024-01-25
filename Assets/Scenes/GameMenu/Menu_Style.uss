@@ -86,4 +86,5 @@
     height: 80px;
     -unity-text-align: lower-center;
     -unity-font-style: bold;
+    -unity-background-scale-mode: scale-to-fit;
 }

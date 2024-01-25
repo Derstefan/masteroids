@@ -12,6 +12,7 @@ public class GameMenuScript : MonoBehaviour
     private VisualElement levelMenu;
     private Label highscoreUI;
     private VisualElement progressBar;
+    private VisualElement healthBar;
     private Button weaponImage;
 
     private List<Button> buttons = new List<Button>();
@@ -82,6 +83,14 @@ public class GameMenuScript : MonoBehaviour
         {
             progressBar.transform.scale = new Vector3((float) data, 1, 1);
         }        
+    }
+
+    public void SetHealth(Component sender, object data)
+    {
+        if (data is float)
+        {
+            healthBar.transform.scale = new Vector3((float)data, 1, 1);
+        }
     }
 
     public void SetLevelMenuActive(Component sender, object data)

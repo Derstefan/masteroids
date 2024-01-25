@@ -21,8 +21,9 @@ public class EnemyProjectileController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void OnCollisionEnter2D(Collision2D c)
+    void OnTriggerEnter2D(Collider2D c)
     {
+        // Debug.Log("EnemyProjectileController OnCollisionEnter2D " + c.gameObject.tag);
         if (c.gameObject.CompareTag("Ship"))
         {
             Explode();

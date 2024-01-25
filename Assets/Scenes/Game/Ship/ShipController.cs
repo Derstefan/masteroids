@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShipController : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class ShipController : MonoBehaviour
 
     private int currentWeaponIndex = 0;
 
-    private float timeSinceLastShot = 0f;
+    private float timeSinceLastShot = 99f;
 
     private GameController gameController;
 
@@ -38,6 +39,9 @@ public class ShipController : MonoBehaviour
     private SkillManager skillManager;
     [HideInInspector]
     public ShipStats shipStats;
+    private bool gameOver = false;
+
+
 
     void Awake()
     {
@@ -87,13 +91,13 @@ public class ShipController : MonoBehaviour
 
     public void learn(Component sender, object data)
     {
-        if(data is string)
+        if (data is string)
         {
-            skillManager.learnSkill((string) data);
+            skillManager.learnSkill((string)data);
             Debug.Log("Learn skill: " + data);
             checkUnlockedWeapons();
             ResumeGame();
-        }        
+        }
     }
 
     public Skill[] getRandomLearnableSkills(int amount)
@@ -136,13 +140,64 @@ public class ShipController : MonoBehaviour
         Camera.main.orthographicSize = Mathf.Lerp(Config.minZoom, Config.maxZoom, zoomFactor);
     }
 
+    public void doDamage(float amount)
+    {
+        shipStats.currentHealth -= amount;
+        float h = shipStats.currentHealth / shipStats.maxHealth;
+        GetComponent<SpriteRenderer>().color = new Color(1f, h, h);
 
+        if (shipStats.currentHealth <= 0)
+        {
+            gameOver = true;
+            StartCoroutine(ShakeScreen(1f, 1f));
+            StartCoroutine(gotToMainManu(0.8f));
+
+        }
+        else
+        {
+            StartCoroutine(ShakeScreen(0.1f, 0.1f)); // Adjust duration and intensity as needed
+        }
+    }
+
+
+
+
+    public void doHeal(float amount)
+    {
+        shipStats.currentHealth += amount;
+        float h = shipStats.currentHealth / shipStats.maxHealth;
+        GetComponent<SpriteRenderer>().color = new Color(1f, h, h);
+    }
+
+    IEnumerator gotToMainManu(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        SceneManager.LoadScene("menu");
+    }
+
+    IEnumerator ShakeScreen(float duration, float intensity)
+    {
+        Vector3 originalPosition = Camera.main.transform.position;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float x = originalPosition.x + Random.Range(-intensity, intensity);
+            float y = originalPosition.y + Random.Range(-intensity, intensity);
+            Camera.main.transform.position = new Vector3(x, y, originalPosition.z);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        Camera.main.transform.position = originalPosition;
+    }
 
     private Coroutine controlCoroutine;
     private Coroutine timeSlowCoroutine;
-    private float timeSlowFactor = 0.5f;
-    private float timeSlowDuration = 2f;
-    private float smoothTime = 0.2f; // 70 ms in seconds
+    private float timeSlowFactor = 0.9f;
+    private float timeSlowDuration = 1f;
+    private float smoothTime = 0.2f;
 
     void OnTriggerEnter2D(Collider2D c)
     {
@@ -150,12 +205,15 @@ public class ShipController : MonoBehaviour
         {
             Debug.Log("Ship hit");
 
+            doDamage(10);
+
+
             // Stop the existing coroutines if they are running
-            if (controlCoroutine != null)
+            if (controlCoroutine != null && Time.timeScale != 0)
             {
                 StopCoroutine(controlCoroutine);
             }
-            if (timeSlowCoroutine != null)
+            if (timeSlowCoroutine != null && Time.timeScale != 0)
             {
                 StopCoroutine(timeSlowCoroutine);
             }
@@ -226,11 +284,15 @@ public class ShipController : MonoBehaviour
         float scrollWheel = Input.GetAxis("Mouse ScrollWheel");
         if (scrollWheel > 0f)
         {
-            CycleWeapon(1); // Scroll up
+            CycleWeapon(1);
+            timeSinceLastShot = 99f;
+
         }
         else if (scrollWheel < 0f)
         {
-            CycleWeapon(-1); // Scroll down
+            CycleWeapon(-1);
+            timeSinceLastShot = 99f;
+
         }
 
         //Debug.Log("Shipstats attack " + shipStats.attackSpeed);
@@ -259,7 +321,8 @@ public class ShipController : MonoBehaviour
         float halfHeight = GetComponent<Renderer>().bounds.extents.y;
 
         Vector3 shootingPosition = transform.position + (transform.up * halfHeight * 1.3f);
-
+        if (weapons[currentWeaponIndex] == null) throw new System.Exception("No weapon available");
+        if (weapons[currentWeaponIndex].GetComponent<WeaponController>() == null) throw new System.Exception("No weapon controller available");
         weapons[currentWeaponIndex].GetComponent<WeaponController>().shoot(shootingPosition, transform.rotation);
     }
 
@@ -267,7 +330,7 @@ public class ShipController : MonoBehaviour
     {
         shipStats.exp++;
         gameController.RaiseHighscore();
-        OnProgressChanged.Raise(this, (float) shipStats.exp / (float) shipStats.expToNextLvl);
+        OnProgressChanged.Raise(this, (float)shipStats.exp / (float)shipStats.expToNextLvl);
 
         if (shipStats.exp >= shipStats.expToNextLvl)
         {

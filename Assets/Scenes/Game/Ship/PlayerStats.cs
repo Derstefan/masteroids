@@ -14,9 +14,9 @@ public class ShipStats : MonoBehaviour
     public Sprite health_sprite;
     public Sprite attackSpeed_sprite;
 
-    public float attackSpeed = 0.8f;
+    public float attackSpeed = 0.1f;
 
-    public float falterDuration = 1.6f; // duration to get control back after hit with asteroid
+    public float falterDuration = 1.3f; // duration to get control back after hit with asteroid
 
     public float collectMinDistance = 5f;
 
@@ -48,11 +48,8 @@ public class ShipStats : MonoBehaviour
                 break;
             case "maxHealth":
                 this.maxHealth += 10;
+                this.currentHealth += 10;
                 Debug.Log("maxHealth learnd");
-                break;
-            case "attackSpeed":
-                this.attackSpeed += 0.3f;
-                Debug.Log("attackSpeed learnd");
                 break;
             case "speed":
                 this.speed += 0.5f;

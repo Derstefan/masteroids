@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -8,6 +9,7 @@ public class GameController : MonoBehaviour
     public GameObject ship;
 
     public GameObject expPrefab;
+    public GameObject healPrefab;
 
     [Header("Events")]
     public GameEvent OnScoreChanged;
@@ -30,7 +32,6 @@ public class GameController : MonoBehaviour
             lastSpawnTimes[i] = -99999f;
         }
         SetHighscore(PlayerPrefs.GetInt("hiscore", 0));
-        BeginGame();
     }
 
     void Update()
@@ -55,6 +56,7 @@ public class GameController : MonoBehaviour
             AsteroidController asteroidController = asteroids[i].GetComponent<AsteroidController>();
             if (asteroidController == null) return;
             if (Time.time < asteroidController.spawnStartTimer) return;
+            if (Time.time > asteroidController.spawnEndTimer) return;
             if (Time.time < lastSpawnTimes[i] + asteroidController.spawnIntervall) return;
             int numberOfSpawns = (int)((Time.time / asteroidController.spawnIntervall) + asteroidController.spawnStartTimer);
             SpawnAsteroids(asteroids[i], asteroidController.spawnAmount + numberOfSpawns * asteroidController.spawnAmountIncrease);
@@ -63,14 +65,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void BeginGame()
-    {
-
-        // score = 0;
-        lives = 3;
-
-        // SpawnAsteroids(asteroids[0], increaseEachWave);
-    }
 
     void SpawnAsteroids(GameObject asteroid, int amount)
     {
@@ -113,7 +107,13 @@ public class GameController : MonoBehaviour
         int num = asteroid.GetComponent<AsteroidController>().spawnExp;
         float maxOffset = 0.2f;
 
-        if (Random.Range(0, 100) < 5)
+        if (Random.Range(0, 100) < 2)
+        {
+            Vector3 randomOffset = new Vector3(Random.Range(-maxOffset, maxOffset), Random.Range(-maxOffset, maxOffset), 0f);
+            Instantiate(healPrefab, asteroid.transform.position + randomOffset, Quaternion.identity);
+        }
+
+        if (Random.Range(0, 100) < 1)
         {
             maxOffset += 0.1f;
             num += 7;
@@ -134,11 +134,43 @@ public class GameController : MonoBehaviour
         }
 
         //destroy asteroid
-        asteroidCount--;
-        Destroy(asteroid);
+        //asteroidCount--;
+        //Destroy(asteroid);
+        asteroid.GetComponent<AsteroidController>().isDestroyed = true;
+        StartCoroutine(FadeOutAndDestroy(asteroid, 0.2f, 0.2f));
 
 
     }
+
+    private IEnumerator FadeOutAndDestroy(GameObject asteroid, float fadeDuration, float delayBeforeDestroy)
+    {
+        SpriteRenderer asteroidRenderer = asteroid.GetComponent<SpriteRenderer>();
+
+        // Gradually fade out the asteroid
+        float elapsedTime = 0f;
+        Color initialColor = asteroidRenderer.color;
+        Color targetColor = new Color(initialColor.r, initialColor.g, initialColor.b, 0f);
+
+        while (elapsedTime < fadeDuration)
+        {
+            asteroidRenderer.color = Color.Lerp(initialColor, targetColor, elapsedTime / fadeDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Set the final color to ensure it reaches the target color
+        asteroidRenderer.color = targetColor;
+
+        // Delay before destroying the asteroid
+        yield return new WaitForSeconds(delayBeforeDestroy);
+
+        // Additional logic after fading, if needed
+
+        // Destroy the asteroid
+        asteroidCount--;
+        Destroy(asteroid);
+    }
+
 
     bool HasOverlap(Vector3 position)
     {
@@ -155,15 +187,6 @@ public class GameController : MonoBehaviour
         return distance < Config.minDistance;
     }
 
-
-    public void DecrementLives()
-    {
-        lives--;
-        if (lives < 1)
-        {
-            // BeginGame();
-        }
-    }
 
     public void SetHighscore(int value)
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class ProjectileController : MonoBehaviour
 {
     [HideInInspector]
-    public float demage = 3f;
+    public float damage = 3f;
 
     [HideInInspector]
     public float lifeTime = 8f;

@@ -6,6 +6,7 @@ public class AsteroidController : MonoBehaviour
     public bool activated = true;
 
     public float spawnStartTimer = 0f;
+    public float spawnEndTimer = 99999f;
     public float spawnIntervall = 10f;
     public int spawnAmount = 30;
     public int spawnAmountIncrease = 10;
@@ -23,6 +24,8 @@ public class AsteroidController : MonoBehaviour
 
     public int spawnExp = 1;
     private float currentLife;
+    [HideInInspector]
+    public bool isDestroyed = false;
 
 
 
@@ -58,38 +61,47 @@ public class AsteroidController : MonoBehaviour
     private bool isSpawning = false;
 
 
+
+    public void doDemage(float amount)
+    {
+        currentLife -= amount;
+        GC.RaiseHighscore(singleHitScore);
+        if (currentLife < 0)
+        {
+
+            if (gameObject == null) return;
+            GC.destroyAsteroid(gameObject);
+            GC.RaiseHighscore(destructionScore);
+            if (splitterObjects != null && isSpawning == false)
+            {
+                isSpawning = true;
+                spawnSmallerAsteroids(Random.Range(splitterAmountMin, splitterAmountMax));
+                isSpawning = false;
+
+            }
+
+            // Play a sound
+            //            AudioSource.PlayClipAtPoint(
+            //               destroy, Camera.main.transform.position);
+            // Add to the score
+            // gameController.IncrementScore();
+
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D c)
     {
-
+        if (isDestroyed) return;
         if (c.gameObject.CompareTag("PlayerProjectile"))
         {
 
-            float demage = c.gameObject.GetComponent<ProjectileController>().demage;
+            float demage = c.gameObject.GetComponent<ProjectileController>().damage;
             StartCoroutine(SmoothBlink());
             currentLife -= demage;
-            GC.RaiseHighscore(singleHitScore);
+            doDemage(demage);
 
-            if (currentLife < 0)
-            {
 
-                if (gameObject == null) return;
-                GC.destroyAsteroid(gameObject);
-                GC.RaiseHighscore(destructionScore);
-                if (splitterObjects != null && isSpawning == false)
-                {
-                    isSpawning = true;
-                    spawnSmallerAsteroids(Random.Range(splitterAmountMin, splitterAmountMax));
-                    isSpawning = false;
 
-                }
-
-                // Play a sound
-                //            AudioSource.PlayClipAtPoint(
-                //               destroy, Camera.main.transform.position);
-                // Add to the score
-                // gameController.IncrementScore();
-
-            }
         }
     }
 
@@ -126,7 +138,7 @@ public class AsteroidController : MonoBehaviour
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         float elapsedTime = 0f;
         float startAlpha = spriteRenderer.color.a;
-        Color startColor = Color.white; // Start color is white
+        Color startColor = GetComponent<SpriteRenderer>().color; // Start color is white
         Color targetColor = Color.red; // Target color is red
 
         while (elapsedTime < Config.blinkDuration)

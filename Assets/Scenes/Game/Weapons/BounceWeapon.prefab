@@ -49,4 +49,5 @@ MonoBehaviour:
   lifeTime: 6
   projectileSpeed: 300
   projectilePrefab: {fileID: 2880619533236538954, guid: 8d453babdb4b9d0488ad1235a8c6e6a9, type: 3}
+  sprite: {fileID: -5759605077845631346, guid: f45f7c50b06c3e445acd55b3a890cd19, type: 3}
   activated: 0

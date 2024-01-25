@@ -1,9 +1,8 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using System.Collections;
-using System.Collections.Generic;
-using System;
 
 public class GameMenuScript : MonoBehaviour
 {
@@ -21,11 +20,13 @@ public class GameMenuScript : MonoBehaviour
     [Header("Events")]
     public GameEvent OnSkillSelected;
 
+    public AudioClip skillSound;
+
     private void OnEnable()
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
-        SetUpHUD(root);        
-        SetUpLevelMenu(root);        
+        SetUpHUD(root);
+        SetUpLevelMenu(root);
     }
 
     private void SetUpHUD(VisualElement root)
@@ -43,13 +44,13 @@ public class GameMenuScript : MonoBehaviour
 
         foreach (VisualElement element in levelMenu.hierarchy.Children())
         {
-            if(element is Button)
+            if (element is Button)
             {
                 buttons.Add((Button)element);
             }
         }
 
-        foreach(Button button in buttons)
+        foreach (Button button in buttons)
         {
             button.RegisterCallback<ClickEvent>(GetSkillFromButton);
             Debug.Log("Click event registered " + button.text);
@@ -60,9 +61,10 @@ public class GameMenuScript : MonoBehaviour
 
     private void GetSkillFromButton(ClickEvent evt)
     {
+        AudioSource.PlayClipAtPoint(skillSound, Camera.main.transform.position);
         Button selectedButton = evt.currentTarget as Button;
         int buttonIndex = buttons.IndexOf(selectedButton);
-        string skill = selectableSkills[buttonIndex];         
+        string skill = selectableSkills[buttonIndex];
         //string skill = selectedButton.text;
         OnSkillSelected.Raise(this, skill);
         selectableSkills.Clear();
@@ -71,18 +73,18 @@ public class GameMenuScript : MonoBehaviour
 
     public void SetHighScore(Component sender, object data)
     {
-        if(data is int)
+        if (data is int)
         {
-            highscoreUI.text = $"SCORE: {(int) data}";
+            highscoreUI.text = $"SCORE: {(int)data}";
         }
     }
 
     public void SetProgress(Component sender, object data)
     {
-        if(data is float)
+        if (data is float)
         {
-            progressBar.transform.scale = new Vector3((float) data, 1, 1);
-        }        
+            progressBar.transform.scale = new Vector3((float)data, 1, 1);
+        }
     }
 
     public void SetHealth(Component sender, object data)
@@ -133,7 +135,7 @@ public class GameMenuScript : MonoBehaviour
     {
         name = name.ToUpper();
         String strg = "";
-        foreach(char c in name)
+        foreach (char c in name)
         {
             if (!IsVovel(c))
             {
@@ -153,7 +155,7 @@ public class GameMenuScript : MonoBehaviour
     public void SetLevelMenuInactive()
     {
         // hide skill selection
-        foreach(Button button in buttons)
+        foreach (Button button in buttons)
         {
             button.style.display = DisplayStyle.None;
         }
@@ -161,7 +163,7 @@ public class GameMenuScript : MonoBehaviour
         levelMenu.style.display = DisplayStyle.None;
 
         // show HUD
-        foreach(VisualElement element in HUD.hierarchy.Children())
+        foreach (VisualElement element in HUD.hierarchy.Children())
         {
             element.style.display = DisplayStyle.Flex;
         }
@@ -169,9 +171,9 @@ public class GameMenuScript : MonoBehaviour
 
     public void SetCurrentWeaponImage(Component sender, object data)
     {
-        if(data is Sprite)
+        if (data is Sprite)
         {
-            Sprite weaponSprite = (Sprite) data;
+            Sprite weaponSprite = (Sprite)data;
             weaponImage.style.backgroundImage = new StyleBackground(weaponSprite);
         }
     }

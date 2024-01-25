@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnSkillSelected: {fileID: 11400000, guid: 6fc293f384b9d6e45b64b6c6371c0062, type: 2}
+  skillSound: {fileID: 8300000, guid: 468a7af8b47811048a7f24ca409f87f0, type: 3}
 --- !u!114 &60530824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,6 +567,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26443969db949fe4896605bc84b8f23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageSound: {fileID: 8300000, guid: b396db1bf9f55394aa11db366e9a842d, type: 3}
+  levelUpSound: {fileID: 8300000, guid: 4493c31467d70a745aaf32d58b842b33, type: 3}
   allWeaponPrefabs:
   - {fileID: 1319726078215399999, guid: 8d70a8cbc971edc429e260526f39b5e8, type: 3}
   - {fileID: 1319726078215399999, guid: 5d64e5ec8bf9f5645846490a458bd4cf, type: 3}
@@ -998,7 +1001,7 @@ GameObject:
   m_Component:
   - component: {fileID: 677855025}
   - component: {fileID: 677855027}
-  - component: {fileID: 677855026}
+  - component: {fileID: 677855028}
   m_Layer: 0
   m_Name: Heal
   m_TagString: Untagged
@@ -1021,22 +1024,6 @@ Transform:
   m_Father: {fileID: 729043032}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &677855026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 677855024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3901a511927a67049af37b14edf918fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ship: {fileID: 301943379}
-  baseMovementSpeed: 1
-  collectDistance: 0.4
-  maxSpeedMultiplier: 2
 --- !u!212 &677855027
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1089,6 +1076,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &677855028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677855024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6038f29cc13d8564c8a99fcc66d9db01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectSound: {fileID: 8300000, guid: b73add52557031944ba214eecd34143c, type: 3}
+  ship: {fileID: 301943379}
+  baseMovementSpeed: 1
+  collectDistance: 0.01
+  maxSpeedMultiplier: 4
 --- !u!1 &729043031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,7 +1256,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 849555082373cc542b53464fed65810c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1610,6 +1614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3901a511927a67049af37b14edf918fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collectSound: {fileID: 8300000, guid: b73add52557031944ba214eecd34143c, type: 3}
   ship: {fileID: 301943379}
   baseMovementSpeed: 1
   collectDistance: 0.4

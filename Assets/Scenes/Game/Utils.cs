@@ -9,15 +9,42 @@ public static class Utils
         var explosionDir = rb.position - explosionPosition;
         var explosionDistance = explosionDir.magnitude;
 
-        if (upwardsModifier == 0)
-            explosionDir /= explosionDistance;
-        else
+        if (explosionDistance > 0)
         {
-            explosionDir.y += upwardsModifier;
-            explosionDir.Normalize();
-        }
+            if (upwardsModifier == 0)
+                explosionDir /= explosionDistance;
+            else
+            {
+                explosionDir.y += upwardsModifier;
+                explosionDir.Normalize();
+            }
+            Vector2 f = Mathf.Lerp(0, explosionForce, (1 - explosionDistance / explosionRadius)) * explosionDir;
+            rb.AddForce(f, mode);
 
-        rb.AddForce(Mathf.Lerp(0, explosionForce, (1 - explosionDistance)) * explosionDir, mode);
+        }
     }
+
+
+
+    public static void AddImplosionForce(this Rigidbody2D rb, float implosionForce, Vector2 implosionPosition, float implosionRadius, float upwardsModifier = 0.0F, ForceMode2D mode = ForceMode2D.Force)
+    {
+        var implosionDir = implosionPosition - rb.position;
+        var implosionDistance = implosionDir.magnitude;
+
+        if (implosionDistance > 0)
+        {
+            if (upwardsModifier == 0)
+                implosionDir /= implosionDistance;
+            else
+            {
+                implosionDir.y += upwardsModifier;
+                implosionDir.Normalize();
+            }
+            Vector2 f = Mathf.Lerp(0, implosionForce, (1 - implosionDistance / implosionRadius)) * implosionDir;
+            rb.AddForce(f, mode);
+        }
+    }
+
+
 
 }

@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "gro\xDF5_0": -5146763606204226964
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

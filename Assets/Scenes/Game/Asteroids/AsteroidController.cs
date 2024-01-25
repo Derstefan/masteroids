@@ -58,6 +58,34 @@ public class AsteroidController : MonoBehaviour
     private bool isSpawning = false;
 
 
+
+    public void doDemage(float amount)
+    {
+        currentLife -= amount;
+        GC.RaiseHighscore(singleHitScore);
+        if (currentLife < 0)
+        {
+
+            if (gameObject == null) return;
+            GC.destroyAsteroid(gameObject);
+            GC.RaiseHighscore(destructionScore);
+            if (splitterObjects != null && isSpawning == false)
+            {
+                isSpawning = true;
+                spawnSmallerAsteroids(Random.Range(splitterAmountMin, splitterAmountMax));
+                isSpawning = false;
+
+            }
+
+            // Play a sound
+            //            AudioSource.PlayClipAtPoint(
+            //               destroy, Camera.main.transform.position);
+            // Add to the score
+            // gameController.IncrementScore();
+
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D c)
     {
 
@@ -67,29 +95,10 @@ public class AsteroidController : MonoBehaviour
             float demage = c.gameObject.GetComponent<ProjectileController>().demage;
             StartCoroutine(SmoothBlink());
             currentLife -= demage;
-            GC.RaiseHighscore(singleHitScore);
+            doDemage(demage);
 
-            if (currentLife < 0)
-            {
 
-                if (gameObject == null) return;
-                GC.destroyAsteroid(gameObject);
-                GC.RaiseHighscore(destructionScore);
-                if (splitterObjects != null && isSpawning == false)
-                {
-                    isSpawning = true;
-                    spawnSmallerAsteroids(Random.Range(splitterAmountMin, splitterAmountMax));
-                    isSpawning = false;
 
-                }
-
-                // Play a sound
-                //            AudioSource.PlayClipAtPoint(
-                //               destroy, Camera.main.transform.position);
-                // Add to the score
-                // gameController.IncrementScore();
-
-            }
         }
     }
 

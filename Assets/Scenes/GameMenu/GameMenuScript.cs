@@ -14,7 +14,8 @@ public class GameMenuScript : MonoBehaviour
     private VisualElement progressBar;
     private Button weaponImage;
 
-    private List<Button> buttons = new List<Button>(); 
+    private List<Button> buttons = new List<Button>();
+    private List<String> selectableSkills = new List<string>();
 
     [Header("Events")]
     public GameEvent OnSkillSelected;
@@ -58,9 +59,12 @@ public class GameMenuScript : MonoBehaviour
 
     private void GetSkillFromButton(ClickEvent evt)
     {
-        Button temp = evt.currentTarget as Button;
-        string skill = temp.text;
+        Button selectedButton = evt.currentTarget as Button;
+        int buttonIndex = buttons.IndexOf(selectedButton);
+        string skill = selectableSkills[buttonIndex];         
+        //string skill = selectedButton.text;
         OnSkillSelected.Raise(this, skill);
+        selectableSkills.Clear();
         SetLevelMenuInactive();
     }
 
@@ -77,8 +81,7 @@ public class GameMenuScript : MonoBehaviour
         if(data is float)
         {
             progressBar.transform.scale = new Vector3((float) data, 1, 1);
-        }
-        
+        }        
     }
 
     public void SetLevelMenuActive(Component sender, object data)
@@ -86,32 +89,56 @@ public class GameMenuScript : MonoBehaviour
         if (data is Skill[])
         {
             //Show skill selection
-            //Debug.Log("Set level menu active");
-            levelMenu.style.display = DisplayStyle.Flex;            
             Skill[] weapons = (Skill[])data;
-
-            int i = 0;
-
-            foreach(Button button in buttons)
-            {
-                if(i < weapons.Length)
-                {
-                    button.text = weapons[i].name;
-                    //Debug.Log(weapons[i].name);
-                    button.style.display = DisplayStyle.Flex;
-                    button[0].style.backgroundImage = new StyleBackground(weapons[i].sprite);
-                    i++;
-                }
-            }
-
-
+            SetupSelectionMenu(weapons);
+            levelMenu.style.display = DisplayStyle.Flex;
 
             //hide HUD
             foreach (VisualElement element in HUD.hierarchy.Children())
             {
-                element.style.display = DisplayStyle.None;                
+                element.style.display = DisplayStyle.None;
             }
-        } 
+        }
+    }
+
+    private void SetupSelectionMenu(Skill[] weapons)
+    {
+        int i = 0;
+
+        foreach (Button button in buttons)
+        {
+            if (i < weapons.Length)
+            {
+                selectableSkills.Add(weapons[i].name);
+                String buttonText = RemoveVovels(weapons[i].name);
+                button.text = buttonText;
+                Debug.Log(buttonText);
+                button.style.display = DisplayStyle.Flex;
+                button[0].style.backgroundImage = new StyleBackground(weapons[i].sprite);
+                i++;
+            }
+        }
+    }
+
+    private String RemoveVovels(string name)
+    {
+        name = name.ToUpper();
+        String strg = "";
+        foreach(char c in name)
+        {
+            if (!IsVovel(c))
+            {
+                strg += c;
+            }
+        }
+
+        Debug.Log("Vovel kill " + strg);
+        return strg;
+    }
+
+    private bool IsVovel(char c)
+    {
+        return (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U');
     }
 
     public void SetLevelMenuInactive()
@@ -129,8 +156,6 @@ public class GameMenuScript : MonoBehaviour
         {
             element.style.display = DisplayStyle.Flex;
         }
-
-        //Debug.Log("Level Menu inactive");
     }
 
     public void SetCurrentWeaponImage(Component sender, object data)

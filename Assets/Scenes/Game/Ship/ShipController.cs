@@ -24,6 +24,7 @@ public class ShipController : MonoBehaviour
     [Header("Events")]
     public GameEvent OnProgressChanged;
     public GameEvent OnLevelUp;
+    public GameEvent OnWeaponChanged;
 
     [Header("Skill selection sprites")]
     public Sprite rotationSpeed_sprite;
@@ -248,6 +249,9 @@ public class ShipController : MonoBehaviour
         if (weapons.Length == 0) throw new System.Exception("No weapons available");
         // Change the current weapon index based on the direction of the scroll
         currentWeaponIndex = (currentWeaponIndex + direction + weapons.Length) % weapons.Length;
+        GameObject weapon = weapons[currentWeaponIndex];
+        Sprite skillImage = weapon.GetComponent<WeaponController>().sprite;
+        OnWeaponChanged.Raise(this, skillImage);
     }
 
     private void shoot()
@@ -272,14 +276,13 @@ public class ShipController : MonoBehaviour
             OnProgressChanged.Raise(this, (float)shipStats.exp);
             shipStats.expToNextLvl = (int)(shipStats.expToNextLvl * 1.2);
 
-            Debug.Log("Level up! next " + shipStats.expToNextLvl);
+            //Debug.Log("Level up! next " + shipStats.expToNextLvl);
 
             Skill[] skills = getRandomLearnableSkills(3);
             PauseGame();
-            //Debug.Log("Learned skills: " + skills[0].name + " " + skills[1].name + " " + skills[2].name);
             OnLevelUp.Raise(this, skills);
-           
-            //learn(skills[0].name);
+
+            //Debug.Log("Learned skills: " + skills[0].name + " " + skills[1].name + " " + skills[2].name);
             //Debug.Log("Learnable skills: " + skillManager.getAllLearnableSkills());
         }
     }

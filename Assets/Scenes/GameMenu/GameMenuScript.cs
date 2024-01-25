@@ -12,6 +12,7 @@ public class GameMenuScript : MonoBehaviour
     private VisualElement levelMenu;
     private Label highscoreUI;
     private VisualElement progressBar;
+    private Button weaponImage;
 
     private List<Button> buttons = new List<Button>(); 
 
@@ -30,6 +31,7 @@ public class GameMenuScript : MonoBehaviour
         HUD = root.Q<VisualElement>("HUD");
         highscoreUI = root.Q<Label>("score");
         progressBar = root.Q<VisualElement>("Foreground");
+        weaponImage = root.Q<Button>("Weapon_Image");
         root.Q<Button>("menu").clicked += LoadMenu;
     }
 
@@ -129,6 +131,15 @@ public class GameMenuScript : MonoBehaviour
         }
 
         //Debug.Log("Level Menu inactive");
+    }
+
+    public void SetCurrentWeaponImage(Component sender, object data)
+    {
+        if(data is Sprite)
+        {
+            Sprite weaponSprite = (Sprite) data;
+            weaponImage.style.backgroundImage = new StyleBackground(weaponSprite);
+        }
     }
 
     private void LoadMenu()

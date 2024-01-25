@@ -49,6 +49,7 @@ MonoBehaviour:
   lifeTime: 1.5
   projectileSpeed: 100
   projectilePrefab: {fileID: 2880619533236538954, guid: 06dca48124f70554ea97a8fabbec19e9, type: 3}
+  sprite: {fileID: -48026942260954152, guid: 5c1bab655024e8c4ebf6a9dba410deb9, type: 3}
   activated: 0
   explosionRadius: 6
   explosionDamage: 15

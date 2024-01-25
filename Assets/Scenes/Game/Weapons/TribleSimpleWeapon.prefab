@@ -47,7 +47,7 @@ MonoBehaviour:
   attackSpeed: 1
   damage: 6
   lifeTime: 2
-  projectileSpeed: 3
+  projectileSpeed: 300
   projectilePrefab: {fileID: 2880619533236538954, guid: 861f353e4cb0e754c82c93a529f3003a, type: 3}
   sprite: {fileID: -5759605077845631346, guid: f45f7c50b06c3e445acd55b3a890cd19, type: 3}
   activated: 0

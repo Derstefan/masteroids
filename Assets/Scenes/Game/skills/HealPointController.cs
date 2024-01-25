@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class HealPointController : MonoBehaviour
 {
+    public AudioClip collectSound;
+
     public GameObject ship;
     public float baseMovementSpeed = 1f; // Adjust this value to set the base movement speed
                                          // Adjust this value to set the minimum distance
@@ -39,6 +41,7 @@ public class HealPointController : MonoBehaviour
 
     void Collect()
     {
+        AudioSource.PlayClipAtPoint(collectSound, Camera.main.transform.position);
         Destroy(gameObject);
         ship.GetComponent<ShipController>().doHeal(10);
     }

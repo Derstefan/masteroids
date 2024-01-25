@@ -7,7 +7,8 @@ public class ShipController : MonoBehaviour
 {
 
 
-    //    public AudioClip crash;
+    public AudioClip damageSound;
+    public AudioClip levelUpSound;
 
 
     public GameObject[] allWeaponPrefabs;
@@ -49,8 +50,8 @@ public class ShipController : MonoBehaviour
         init();
     }
     void Start()
-    {       
-        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();      
+    {
+        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
     }
 
     void init()
@@ -142,6 +143,7 @@ public class ShipController : MonoBehaviour
 
     public void doDamage(float amount)
     {
+        AudioSource.PlayClipAtPoint(damageSound, Camera.main.transform.position);
         shipStats.currentHealth -= amount;
         float h = shipStats.currentHealth / shipStats.maxHealth;
         GetComponent<SpriteRenderer>().color = new Color(1f, h, h);
@@ -334,6 +336,7 @@ public class ShipController : MonoBehaviour
 
         if (shipStats.exp >= shipStats.expToNextLvl)
         {
+            AudioSource.PlayClipAtPoint(levelUpSound, Camera.main.transform.position);
             lvl++;
             shipStats.exp = 0;
             OnProgressChanged.Raise(this, (float)shipStats.exp);

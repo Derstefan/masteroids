@@ -86,16 +86,16 @@ public class GameMenuScript : MonoBehaviour
         {
             //Show skill selection
             levelMenu.style.display = DisplayStyle.Flex;            
-            Skill[] wheapons = (Skill[])data;
+            Skill[] weapons = (Skill[])data;
 
             int i = 0;
 
             foreach(Button button in buttons)
             {
-                if(i < wheapons.Length)
+                if(i < weapons.Length)
                 {
-                    button.text = wheapons[i].name;
-                    buttons[i].visible = true;
+                    button.text = weapons[i].name;
+                    buttons[i].style.display = DisplayStyle.Flex;
                     i++;
                 }
             }
@@ -114,7 +114,7 @@ public class GameMenuScript : MonoBehaviour
         // hide skill selection
         foreach(Button button in buttons)
         {
-            button.visible = false;
+            button.style.display = DisplayStyle.None;
         }
 
         levelMenu.style.display = DisplayStyle.None;

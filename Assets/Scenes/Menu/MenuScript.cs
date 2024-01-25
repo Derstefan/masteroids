@@ -4,29 +4,30 @@ using UnityEngine.UIElements;
 
 public class MenuScript : MonoBehaviour
 {
-
     private void OnEnable()
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
-        root.Q<Button>("start").clicked += playMatch;
-        root.Q<Button>("options").clicked += generatorScene;
-        root.Q<Button>("exit").clicked += exitGame;
-    }   
+        root.Q<Button>("start").clicked += PlayMatch;
+        root.Q<Label>("highscore").text = "Highscore: " + PlayerPrefs.GetInt("highscore", 0);
+        root.Q<Button>("exit").clicked += ExitGame;
 
-    private void playMatch()
+
+    }
+
+    private void PlayMatch()
     {
 
+        // Load the Game scene
         SceneManager.LoadScene("Game");
     }
 
-    private void generatorScene()
-    {
-        SceneManager.LoadScene("Game");
-    }
 
-    private void exitGame()
+
+    private void ExitGame()
     {
+
+        // Quit the application
         Application.Quit();
-    }    
+    }
 }

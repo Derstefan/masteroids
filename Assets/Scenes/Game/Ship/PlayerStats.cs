@@ -13,9 +13,9 @@ public class ShipStats
     public float currentHealth = 100f;
     public float maxSpeed = 20f;
 
-    public float attackSpeed = 0.8f;
+    public float attackSpeed = 0.1f;
 
-    public float falterDuration = 1.6f; // duration to get control back after hit with asteroid
+    public float falterDuration = 1.3f; // duration to get control back after hit with asteroid
 
 
     public float collectMinDistance = 5f;
@@ -25,7 +25,6 @@ public class ShipStats
         return new Skill[] {
             new LevelingSkill("rotationSpeed", 0, "",this),
             new LevelingSkill("maxHealth", 0, "",this),
-            new LevelingSkill("attackSpeed", 0, "",this),
             new LevelingSkill("speed", 0, "",this),
         };
     }
@@ -40,11 +39,8 @@ public class ShipStats
                 break;
             case "maxHealth":
                 this.maxHealth += 10;
+                this.currentHealth += 10;
                 Debug.Log("maxHealth learnd");
-                break;
-            case "attackSpeed":
-                this.attackSpeed += 0.3f;
-                Debug.Log("attackSpeed learnd");
                 break;
             case "speed":
                 this.speed += 0.5f;

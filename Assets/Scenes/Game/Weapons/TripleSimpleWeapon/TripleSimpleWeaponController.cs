@@ -14,8 +14,8 @@ public class TripleSimpleWeaponController : WeaponController
     public override Skill[] getWeaponSkills()
     {
         return new Skill[] {
-        new UnlockSkill("Triple Simple Weapon",0,null,this),
-        new LevelingSkill("Damage Triple Simple Weapon",0,"Triple Simple Weapon",this),
+        new UnlockSkill("Triple Simple Weapon",0,null, this.sprite, this),
+        new LevelingSkill("Damage Triple Simple Weapon",0,"Triple Simple Weapon", this.sprite, this),
         };
     }
 

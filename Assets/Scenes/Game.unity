@@ -199,6 +199,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b48fccd0b674a804888536fe27bb6057, type: 2}
   - {fileID: 11400000, guid: dbeee8e7aef865444bbd900c96556fda, type: 2}
   - {fileID: 11400000, guid: 382df44480b9d34408374bee28ee877c, type: 2}
+  - {fileID: 11400000, guid: 5000ce5f2ea6a354f837947169ae6c79, type: 2}
   response:
     m_PersistentCalls:
       m_Calls:
@@ -229,6 +230,18 @@ MonoBehaviour:
       - m_Target: {fileID: 60530823}
         m_TargetAssemblyTypeName: GameMenuScript, Assembly-CSharp
         m_MethodName: SetLevelMenuActive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 60530823}
+        m_TargetAssemblyTypeName: GameMenuScript, Assembly-CSharp
+        m_MethodName: SetCurrentWeaponImage
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -565,7 +578,13 @@ MonoBehaviour:
   weapons: []
   OnProgressChanged: {fileID: 11400000, guid: dbeee8e7aef865444bbd900c96556fda, type: 2}
   OnLevelUp: {fileID: 11400000, guid: 382df44480b9d34408374bee28ee877c, type: 2}
+  OnWeaponChanged: {fileID: 11400000, guid: 5000ce5f2ea6a354f837947169ae6c79, type: 2}
+  rotationSpeed_sprite: {fileID: -5112143105788710107, guid: 19364d83fb2f3b34789a5d9a60afb92a, type: 3}
+  speed_sprite: {fileID: -4284474766959344382, guid: 10ca7a169534ab54ca404a104fa12a65, type: 3}
+  health_sprite: {fileID: -8504478667243500470, guid: bcc9234664b11cf499dc33244141e179, type: 3}
+  attackSpeed_sprite: {fileID: 8195489750646124712, guid: c3cdb0b0b2aad144c9ea2aa892daba38, type: 3}
   lvl: 1
+  shipStats: {fileID: 0}
 --- !u!114 &301943381
 MonoBehaviour:
   m_ObjectHideFlags: 0

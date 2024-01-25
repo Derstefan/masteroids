@@ -2,16 +2,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class GameMenuScript : MonoBehaviour
 {
-    private GameController gameController;
-    private Label HighscoreUI;
-    private VisualElement ProgressBar;
-    private Button[] buttons; 
-    private Button leftOption;
-    private Button rightOption;
+    //VisualElements
+    private VisualElement HUD;
+    private VisualElement levelMenu;
+    private Label highscoreUI;
+    private VisualElement progressBar;
+    private VisualElement healthBar;
+    private Button weaponImage;
+
+    private List<Button> buttons = new List<Button>();
+    private List<String> selectableSkills = new List<string>();
 
     [Header("Events")]
     public GameEvent OnSkillSelected;
@@ -19,45 +24,56 @@ public class GameMenuScript : MonoBehaviour
     private void OnEnable()
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
+        SetUpHUD(root);        
+        SetUpLevelMenu(root);        
+    }
 
-        HighscoreUI = root.Q<Label>("score");
-        ProgressBar = root.Q<VisualElement>("Foreground");
+    private void SetUpHUD(VisualElement root)
+    {
+        HUD = root.Q<VisualElement>("HUD");
+        highscoreUI = root.Q<Label>("score");
+        progressBar = root.Q<VisualElement>("Foreground");
+        weaponImage = root.Q<Button>("Weapon_Image");
         root.Q<Button>("menu").clicked += LoadMenu;
-        SetUpLevelMenu(root);
-        
     }
 
     private void SetUpLevelMenu(VisualElement root)
     {
-        leftOption = root.Q<Button>("Left_Option");
-        rightOption = root.Q<Button>("Right_Option");
-        buttons = new[] { leftOption, rightOption };
+        levelMenu = root.Q<VisualElement>("LevelUp_Menu");
+
+        foreach (VisualElement element in levelMenu.hierarchy.Children())
+        {
+            if(element is Button)
+            {
+                buttons.Add((Button)element);
+            }
+        }
 
         foreach(Button button in buttons)
         {
             button.RegisterCallback<ClickEvent>(GetSkillFromButton);
-        }        
+            Debug.Log("Click event registered " + button.text);
+        }
+
+        SetLevelMenuInactive();
     }
 
     private void GetSkillFromButton(ClickEvent evt)
     {
-        Button temp = evt.currentTarget as Button;
-        string skill = temp.text;
-        Debug.Log("Learn skill " + skill);
+        Button selectedButton = evt.currentTarget as Button;
+        int buttonIndex = buttons.IndexOf(selectedButton);
+        string skill = selectableSkills[buttonIndex];         
+        //string skill = selectedButton.text;
         OnSkillSelected.Raise(this, skill);
+        selectableSkills.Clear();
         SetLevelMenuInactive();
-    }
-
-    private void Start()
-    {
-        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
     }
 
     public void SetHighScore(Component sender, object data)
     {
         if(data is int)
         {
-            HighscoreUI.text = $"SCORE: {(int) data}";
+            highscoreUI.text = $"SCORE: {(int) data}";
         }
     }
 
@@ -65,32 +81,98 @@ public class GameMenuScript : MonoBehaviour
     {
         if(data is float)
         {
-            ProgressBar.transform.scale = new Vector3((float) data, 1, 1);
+            progressBar.transform.scale = new Vector3((float) data, 1, 1);
+        }        
+    }
+
+    public void SetHealth(Component sender, object data)
+    {
+        if (data is float)
+        {
+            healthBar.transform.scale = new Vector3((float)data, 1, 1);
         }
-        
     }
 
     public void SetLevelMenuActive(Component sender, object data)
-    {       
-        if(data is Skill[])
+    {
+        if (data is Skill[])
         {
-            Skill[] wheapons = (Skill[])data;
-            for (int i = 0; i < buttons.Length; i++)
+            //Show skill selection
+            Skill[] weapons = (Skill[])data;
+            SetupSelectionMenu(weapons);
+            levelMenu.style.display = DisplayStyle.Flex;
+
+            //hide HUD
+            foreach (VisualElement element in HUD.hierarchy.Children())
             {
-                buttons[i].text = wheapons[i].name;
-                buttons[i].visible = true;
+                element.style.display = DisplayStyle.None;
+            }
+        }
+    }
+
+    private void SetupSelectionMenu(Skill[] weapons)
+    {
+        int i = 0;
+
+        foreach (Button button in buttons)
+        {
+            if (i < weapons.Length)
+            {
+                selectableSkills.Add(weapons[i].name);
+                String buttonText = RemoveVovels(weapons[i].name);
+                button.text = buttonText;
+                Debug.Log(buttonText);
+                button.style.display = DisplayStyle.Flex;
+                button[0].style.backgroundImage = new StyleBackground(weapons[i].sprite);
+                i++;
+            }
+        }
+    }
+
+    private String RemoveVovels(string name)
+    {
+        name = name.ToUpper();
+        String strg = "";
+        foreach(char c in name)
+        {
+            if (!IsVovel(c))
+            {
+                strg += c;
             }
         }
 
-       
+        Debug.Log("Vovel kill " + strg);
+        return strg;
+    }
 
+    private bool IsVovel(char c)
+    {
+        return (c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U');
     }
 
     public void SetLevelMenuInactive()
     {
-        for (int i = 0; i < buttons.Length; i++)
+        // hide skill selection
+        foreach(Button button in buttons)
         {
-            buttons[i].visible = false;
+            button.style.display = DisplayStyle.None;
+        }
+
+        levelMenu.style.display = DisplayStyle.None;
+
+        // show HUD
+        foreach(VisualElement element in HUD.hierarchy.Children())
+        {
+            element.style.display = DisplayStyle.Flex;
+        }
+    }
+
+    public void SetCurrentWeaponImage(Component sender, object data)
+    {
+        if(data is Sprite)
+        {
+            Sprite weaponSprite = (Sprite) data;
+            weaponImage.style.backgroundImage = new StyleBackground(weaponSprite);
         }
     }
 

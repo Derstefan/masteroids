@@ -8,6 +8,7 @@ public abstract class WeaponController : MonoBehaviour
     public float lifeTime;
     public float projectileSpeed;
     public GameObject projectilePrefab;
+    public Sprite sprite;
 
     public bool activated = false;
 

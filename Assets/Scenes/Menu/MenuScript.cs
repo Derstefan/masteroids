@@ -16,8 +16,9 @@ public class MenuScript : MonoBehaviour
         root.Q<Label>("highscore").text = "Highscore: " + GameController.endscore;
         root.Q<Button>("exit").clicked += ExitGame;
 
-        if(GameController.endscore != 0)
+        if (GameController.endscore != 0)
         {
+            root.Q<Label>("highscore").style.color = new Color(1, 1, 1, 1);
             root.Q<Label>("highscore").styleSheets.Add(green_style);
         }
     }
@@ -27,6 +28,7 @@ public class MenuScript : MonoBehaviour
 
         // Load the Game scene
         SceneManager.LoadScene("Game");
+
     }
 
 

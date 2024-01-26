@@ -13,10 +13,10 @@ public class ImplosionWeaponController : WeaponController
     public override Skill[] getWeaponSkills()
     {
         return new Skill[]{
-            new UnlockSkill("Implosion Weapon", 20,null,this.sprite, this),
-            new LevelingSkill("Implosion Granade Damage", 21, "Implosion Weapon",this.sprite, this),
-            new LevelingSkill("Implosion Granade Explosion Radius", 22, "Implosion Weapon",this.sprite, this),
-            new LevelingSkill("Implosion Granade AttackSpeed", 23, "Implosion Weapon",this.sprite, this)
+            new UnlockSkill("Implosion", 7,null,this.sprite, this),
+            new LevelingSkill("Implosion-Damage", 10, "Implosion",this.sprite, this),
+            new LevelingSkill("Implosion-ExplosionRadius", 10, "Implosion",this.sprite, this),
+            new LevelingSkill("Implosion-AttackSpeed", 10, "Implosion",this.sprite, this)
         };
     }
 
@@ -25,16 +25,16 @@ public class ImplosionWeaponController : WeaponController
     {
         switch (skillName)
         {
-            case "Implosion Weapon":
+            case "Implosion":
                 this.activated = true;
                 break;
-            case "Implosion Granade Damage":
+            case "Implosion-Damage":
                 this.damage += 5;
                 break;
-            case "Implosion Granade Explosion Radius":
+            case "Implosion-ExplosionRadius":
                 this.explosionRadius += 0.5f;
                 break;
-            case "Implosion Granade AttackSpeed":
+            case "Implosion-AttackSpeed":
                 this.attackSpeed += 0.2f;
                 break;
             default:

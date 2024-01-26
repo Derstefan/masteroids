@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MineProjectileController : ProjectileController
 {
-
+    public AudioClip explosionSound;
     public Color explosionColor = new Color(1f, 0.74f, 0.2f); // Orange color
     public float explosionDuration;
 
@@ -87,6 +87,7 @@ public class MineProjectileController : ProjectileController
 
     public override void Explode()
     {
+        AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position);
         StartExplosionEffect();
 
         Vector3 explosionPos = transform.position;

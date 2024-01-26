@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class BiggerWeaponController : WeaponController
 {
+    public AudioClip shootSound;
+
     public override void shoot(Vector3 pos, Quaternion direction)
     {
+        AudioSource.PlayClipAtPoint(shootSound, Camera.main.transform.position);
+
         createShoot(pos, direction);
 
     }
@@ -11,10 +15,10 @@ public class BiggerWeaponController : WeaponController
     public override Skill[] getWeaponSkills()
     {
         return new Skill[]{
-            new UnlockSkill("Bigger Weapon", 0,null, this.sprite, this),
-            new LevelingSkill("Damage Bigger Weapon", 0, "Bigger Weapon", this.sprite, this),
-            new LevelingSkill("AttackSpeed Bigger Weapon", 0, "Bigger Weapon", this.sprite, this),
-            new LevelingSkill("Projectil Speed Bigger Weapon", 0, "Damage Bigger Weapon", this.sprite, this),
+            new UnlockSkill("Canone", 0,null, this.sprite, this),
+            new LevelingSkill("Canone-Damage", 0, "Canone", this.sprite, this),
+            new LevelingSkill("Canone-AttackSpeed", 0, "Canone", this.sprite, this),
+            new LevelingSkill("Canone-ProjectileSpeed", 0, "Canone", this.sprite, this),
 
             };
     }
@@ -24,16 +28,16 @@ public class BiggerWeaponController : WeaponController
     {
         switch (skillName)
         {
-            case "Bigger Weapon":
+            case "Canone":
                 this.activated = true;
                 break;
-            case "Damage Bigger Weapon":
+            case "Canone-Damage":
                 this.damage += 10;
                 break;
-            case "AttackSpeed Bigger Weapon":
+            case "Canone-AttackSpeed":
                 this.attackSpeed -= 0.01f;
                 break;
-            case "Projectil Speed Bigger Weapon":
+            case "Canone-ProjectileSpeed":
                 this.projectileSpeed += 0.1f;
                 break;
             default:

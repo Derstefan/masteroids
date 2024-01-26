@@ -368,7 +368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
       propertyPath: spawnExp
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
       propertyPath: activated
@@ -384,7 +384,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
       propertyPath: spawnStartTimer
-      value: 300
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
       propertyPath: splitterAmountMax
@@ -1014,11 +1014,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnEndTimer
-      value: 120
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnIntervall
-      value: 40
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
+      propertyPath: spawnStartTimer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: splitterObjects
@@ -1482,7 +1486,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 823221877528608138, guid: 96e9ac72f76d832469c9a7ba96725723, type: 3}
-  m_Color: {r: 0.11320752, g: 0.10519756, b: 0.10519756, a: 1}
+  m_Color: {r: 0.0029369951, g: 0.08326905, b: 0.6226415, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1904,15 +1908,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnEndTimer
-      value: 300
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnIntervall
-      value: 40
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnStartTimer
-      value: 20
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: splitterObjects
@@ -1920,7 +1924,7 @@ PrefabInstance:
       objectReference: {fileID: 375088599}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnAmountIncrease
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3063406916889289795, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -2158,6 +2162,14 @@ PrefabInstance:
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnEndTimer
       value: 99999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
+      propertyPath: spawnIntervall
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
+      propertyPath: spawnStartTimer
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: splitterObjects

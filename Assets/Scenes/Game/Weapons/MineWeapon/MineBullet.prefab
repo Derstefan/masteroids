@@ -175,9 +175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c063d54edad916944937d3dfa8164243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demage: 3
+  damage: 3
   lifeTime: 8
   force: 400
+  explosionSound: {fileID: 8300000, guid: d09bf39a5cd75a64f858f7aaa1e99f80, type: 3}
   explosionColor: {r: 1, g: 0.74, b: 0.2, a: 1}
   explosionDuration: 0.05
   explosionForce: 100

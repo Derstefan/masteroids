@@ -71,7 +71,7 @@ public class ShipController : MonoBehaviour
             skillManager.addWeaponSkills(weapon.GetComponent<WeaponController>().getWeaponSkills());
         }
         // startSkills
-        learn(this, "Simple Weapon");
+        learn(this, "Gunn");
 
         /*
         foreach(Skill skill in skillManager.allSkills)
@@ -117,6 +117,7 @@ public class ShipController : MonoBehaviour
 
     void FixedUpdate()
     {
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 direction = mousePosition - transform.position;
         direction.Normalize();
@@ -126,13 +127,13 @@ public class ShipController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, newAngle);
 
         Vector2 forceDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-
-        // Apply force with a maximum speed constraint
+        float deceleration = (1.5f + Mathf.Abs(Vector2.Angle(forceDirection, rb.velocity)) / 180f);
+        //Apply force with a maximum speed constraint
+        rb.AddForce(forceDirection * shipStats.speed * deceleration);
         float currentSpeed = rb.velocity.magnitude;
-        if (currentSpeed < shipStats.maxSpeed)
+        if (currentSpeed > shipStats.maxSpeed)
         {
-            rb.AddForce(forceDirection * shipStats.speed);
+            rb.velocity = rb.velocity.normalized * shipStats.maxSpeed;
         }
 
         // Adjust camera orthographic size based on velocity
@@ -327,7 +328,6 @@ public class ShipController : MonoBehaviour
     private void shoot()
     {
         float halfHeight = GetComponent<Renderer>().bounds.extents.y;
-
         Vector3 shootingPosition = transform.position + (transform.up * halfHeight * 1.3f);
         if (weapons[currentWeaponIndex] == null) throw new System.Exception("No weapon available");
         if (weapons[currentWeaponIndex].GetComponent<WeaponController>() == null) throw new System.Exception("No weapon controller available");

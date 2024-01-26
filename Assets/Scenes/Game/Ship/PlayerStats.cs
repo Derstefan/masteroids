@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class ShipStats 
+public class ShipStats
 {
     public float rotationSpeed = 110.0f;
     public float speed = 3f;
     public int exp = 0;
-    public int expToNextLvl = 1;
+    public int expToNextLvl = 7;
     public float maxHealth = 100f;
     public float currentHealth = 100f;
     public float maxSpeed = 20f;
@@ -31,9 +31,9 @@ public class ShipStats
     public Skill[] getSkills()
     {
         return new Skill[] {
-            new LevelingSkill("rotationSpeed", 0, "", this.rotationSpeed_sprite, this),
+            new LevelingSkill("rtnSpeed", 0, "", this.rotationSpeed_sprite, this),
             new LevelingSkill("maxHealth", 0, "", this.health_sprite, this),
-            new LevelingSkill("attackSpeed", 0, "", this.attackSpeed_sprite, this),
+//            new LevelingSkill("attackSpeed", 0, "", this.attackSpeed_sprite, this),
             new LevelingSkill("speed", 0, "", this.speed_sprite, this),
         };
     }
@@ -43,7 +43,7 @@ public class ShipStats
         Debug.Log("Playerstats ist trying to learn " + skillName);
         switch (skillName)
         {
-            case "rotationSpeed":
+            case "rtnSpeed":
                 this.rotationSpeed += 40;
                 Debug.Log("rotationSpeed learnd");
                 break;

@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject[] asteroids;
+
     [HideInInspector]
     public float[] lastSpawnTimes;
     public GameObject ship;
@@ -26,14 +27,17 @@ public class GameController : MonoBehaviour
 
     private int asteroidCount = 0;
 
+    private float gameStartedAt;
+
     void Start()
     {
+        gameStartedAt = Time.time;
         lastSpawnTimes = new float[asteroids.Length];
         for (int i = 0; i < asteroids.Length; i++)
         {
             lastSpawnTimes[i] = -99999f;
         }
-        SetHighscore(PlayerPrefs.GetInt("hiscore", 0));
+        //SetHighscore(PlayerPrefs.GetInt("hiscore", 0));
     }
 
     void Update()
@@ -47,23 +51,30 @@ public class GameController : MonoBehaviour
     private void FixedUpdate()
     {
         checkForNewSpawn();
-
     }
 
     void checkForNewSpawn()
     {
+
+        float time = Time.time - gameStartedAt;
+
         for (int i = 0; i < asteroids.Length; i++)
         {
-            if (asteroids[i] == null) return;
+            if (asteroids[i] == null) continue;
+
             AsteroidController asteroidController = asteroids[i].GetComponent<AsteroidController>();
-            if (asteroidController == null) return;
-            if (Time.time < asteroidController.spawnStartTimer) return;
-            if (Time.time > asteroidController.spawnEndTimer) return;
-            if (Time.time < lastSpawnTimes[i] + asteroidController.spawnIntervall) return;
-            int numberOfSpawns = (int)((Time.time / asteroidController.spawnIntervall) + asteroidController.spawnStartTimer);
+            if (asteroidController == null) continue;
+            if (time < asteroidController.spawnStartTimer) continue;
+
+            if (time > asteroidController.spawnEndTimer) continue;
+
+            if (time < lastSpawnTimes[i] + asteroidController.spawnIntervall) continue;
+
+            int numberOfSpawns = (int)((time / asteroidController.spawnIntervall) + asteroidController.spawnStartTimer);
             SpawnAsteroids(asteroids[i], asteroidController.spawnAmount + numberOfSpawns * asteroidController.spawnAmountIncrease);
 
-            lastSpawnTimes[i] = (Time.time);
+
+            lastSpawnTimes[i] = (time);
         }
     }
 
@@ -90,7 +101,14 @@ public class GameController : MonoBehaviour
             {
                 count++;
                 GameObject o = spawnAsteroid(asteroid, pos, Quaternion.Euler(0, 0, Random.Range(-0.0f, 359.0f)));
+                Debug.Log("Spawned " + o.name);
                 o.GetComponent<Rigidbody2D>().AddForce(o.transform.up * Random.Range(-50.0f, 6250.0f));
+
+
+            }
+            else
+            {
+                Debug.Log("Could not spawn asteroid");
             }
         }
         //Debug.Log("Spawn " + count + " asteroids");
@@ -205,6 +223,6 @@ public class GameController : MonoBehaviour
     public void SetEndscore()
     {
         endscore = _highscore;
-        Debug.Log("Endscore " + endscore); 
+        Debug.Log("Endscore " + endscore);
     }
 }

@@ -4,6 +4,8 @@ public class SpikeController : MonoBehaviour
 {
     public GameObject projectilPrefab;
     public int numberOfSpikes = 7;
+
+
     public void CreateAndRotateSpikes()
     {
         float angleIncrement = 360f / numberOfSpikes; // Divide 360 degrees into 7 parts

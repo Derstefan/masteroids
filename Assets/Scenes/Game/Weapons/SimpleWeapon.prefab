@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4727059878574124263
 MonoBehaviour:
@@ -51,3 +51,4 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2880619533236538954, guid: af3a8021c81d7024ebed3fc735b4e3f9, type: 3}
   sprite: {fileID: -48026942260954152, guid: 5c1bab655024e8c4ebf6a9dba410deb9, type: 3}
   activated: 0
+  shootSound: {fileID: 8300000, guid: 70de4b4fcb1febd4d8f63bfd8e824df3, type: 3}

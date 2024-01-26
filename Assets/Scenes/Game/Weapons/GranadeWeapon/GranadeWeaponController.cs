@@ -13,10 +13,10 @@ public class GranadeWeaponController : WeaponController
     public override Skill[] getWeaponSkills()
     {
         return new Skill[]{
-            new UnlockSkill("Granade Weapon", 7,null,this.sprite,this),
-            new LevelingSkill("Granade Damage", 8, "Granade Weapon",this.sprite, this),
-            new LevelingSkill("Granade Explosion Radius", 9, "Granade Weapon",this.sprite, this),
-            new LevelingSkill("Granade AttackSpeed", 20, "Granade Weapon",this.sprite, this),
+            new UnlockSkill("Granade", 5,null,this.sprite,this),
+            new LevelingSkill("Granade-Damage", 8, "Granade",this.sprite, this),
+            new LevelingSkill("Granade-ExplosionRadius", 9, "Granade",this.sprite, this),
+            new LevelingSkill("Granade-AttackSpeed", 20, "Granade",this.sprite, this),
             };
     }
 
@@ -25,16 +25,16 @@ public class GranadeWeaponController : WeaponController
     {
         switch (skillName)
         {
-            case "Granade Weapon":
+            case "Granade":
                 this.activated = true;
                 break;
-            case "Granade Damage":
+            case "Granade-Damage":
                 this.damage += 5;
                 break;
-            case "Granade Explosion Radius":
+            case "Granade-ExplosionRadius":
                 this.explosionRadius += 0.5f;
                 break;
-            case "Granade AttackSpeed":
+            case "Granade-AttackSpeed":
                 this.attackSpeed += 0.2f;
                 break;
             default:

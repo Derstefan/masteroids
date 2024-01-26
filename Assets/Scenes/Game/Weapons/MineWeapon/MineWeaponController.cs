@@ -12,10 +12,10 @@ public class MineWeaponController : WeaponController
     public override Skill[] getWeaponSkills()
     {
         return new Skill[]{
-            new UnlockSkill("Mine Weapon", 10,null,this.sprite,this),
-            new LevelingSkill("Mine Damage", 11, "Mine Weapon",this.sprite, this),
-            new LevelingSkill("Mine Explosion Radius", 12, "Mine Weapon",this.sprite, this),
-            new LevelingSkill("Mine AttackSpeed", 20, "Mine Weapon",this.sprite, this),
+            new UnlockSkill("Mine", 7,null,this.sprite,this),
+            new LevelingSkill("Mine-Damage", 10, "Mine",this.sprite, this),
+            new LevelingSkill("Mine-ExplosionRadius", 10, "Mine",this.sprite, this),
+            new LevelingSkill("Mine-AttackSpeed", 20, "Mine",this.sprite, this),
             };
     }
 
@@ -24,16 +24,16 @@ public class MineWeaponController : WeaponController
     {
         switch (skillName)
         {
-            case "Mine Weapon":
+            case "Mine":
                 this.activated = true;
                 break;
-            case "Mine Damage":
+            case "Mine-Damage":
                 this.damage += 5;
                 break;
-            case "Mine Explosion Radius":
+            case "Mine-ExplosionRadius":
                 this.explosionRadius += 0.5f;
                 break;
-            case "Mine AttackSpeed":
+            case "Mine-AttackSpeed":
                 this.attackSpeed += 0.2f;
                 break;
             default:

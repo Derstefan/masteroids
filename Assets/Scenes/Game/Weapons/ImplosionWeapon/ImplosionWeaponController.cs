@@ -14,9 +14,9 @@ public class ImplosionWeaponController : WeaponController
     {
         return new Skill[]{
             new UnlockSkill("Implosion Weapon", 20,null,this.sprite, this),
-            new LevelingSkill("Implosion Granade Damage", 21, "Implosion Granade",this.sprite, this),
-            new LevelingSkill("Implosion Granade Explosion Radius", 22, "Implosion Granade",this.sprite, this),
-            new LevelingSkill("Implosion Granade AttackSpeed", 23, "Implosion Granade",this.sprite, this)
+            new LevelingSkill("Implosion Granade Damage", 21, "Implosion Weapon",this.sprite, this),
+            new LevelingSkill("Implosion Granade Explosion Radius", 22, "Implosion Weapon",this.sprite, this),
+            new LevelingSkill("Implosion Granade AttackSpeed", 23, "Implosion Weapon",this.sprite, this)
         };
     }
 

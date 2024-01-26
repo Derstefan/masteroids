@@ -376,19 +376,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
       propertyPath: spawnAmount
-      value: 11
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
       propertyPath: spawnIntervall
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
       propertyPath: spawnStartTimer
       value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
-      propertyPath: spawnAmountIncrease
+      propertyPath: splitterAmountMax
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
+      propertyPath: splitterAmountMin
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
+      propertyPath: spawnAmountIncrease
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
       propertyPath: spawnForceMultiplier
@@ -1003,7 +1011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnAmount
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnEndTimer
@@ -1011,12 +1019,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnIntervall
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: splitterObjects
       value: 
       objectReference: {fileID: 1668052570}
+    - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
+      propertyPath: spawnAmountIncrease
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1231,9 +1243,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 376b95b88ae079f4b9b7781f5124879a, type: 3}
+      propertyPath: spawnAmount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071842303519050972, guid: 376b95b88ae079f4b9b7781f5124879a, type: 3}
+      propertyPath: spawnIntervall
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071842303519050972, guid: 376b95b88ae079f4b9b7781f5124879a, type: 3}
       propertyPath: splitterObjects
       value: 
       objectReference: {fileID: 1189228306}
+    - target: {fileID: 6071842303519050972, guid: 376b95b88ae079f4b9b7781f5124879a, type: 3}
+      propertyPath: spawnAmountIncrease
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8208719035873257249, guid: 376b95b88ae079f4b9b7781f5124879a, type: 3}
       propertyPath: m_Name
       value: mediumAsteroid
@@ -1710,6 +1734,18 @@ PrefabInstance:
       propertyPath: activated
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
+      propertyPath: spawnAmount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
+      propertyPath: spawnIntervall
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
+      propertyPath: spawnAmountIncrease
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8208719035873257249, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
       propertyPath: m_Name
       value: smallAsteroid
@@ -1873,7 +1909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnIntervall
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnStartTimer

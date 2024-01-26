@@ -170,7 +170,9 @@ public class ShipController : MonoBehaviour
     public void doHeal(float amount)
     {
         shipStats.currentHealth += amount;
+        Debug.Log("Healing. " + amount);
         float h = shipStats.currentHealth / shipStats.maxHealth;
+        OnHealthChanged.Raise(this, h);
         GetComponent<SpriteRenderer>().color = new Color(1f, h, h);
     }
 

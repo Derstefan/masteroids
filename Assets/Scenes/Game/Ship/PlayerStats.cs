@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class ShipStats : MonoBehaviour
+public class ShipStats 
 {
     public float rotationSpeed = 110.0f;
     public float speed = 3f;
     public int exp = 0;
-    public int expToNextLvl = 3;
+    public int expToNextLvl = 7;
     public float maxHealth = 100f;
     public float currentHealth = 100f;
     public float maxSpeed = 20f;
@@ -40,6 +40,7 @@ public class ShipStats : MonoBehaviour
 
     public void learnSkill(string skillName)
     {
+        Debug.Log("Playerstats ist trying to learn " + skillName);
         switch (skillName)
         {
             case "rotationSpeed":

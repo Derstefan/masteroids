@@ -27,6 +27,7 @@ public class ShipController : MonoBehaviour
     public GameEvent OnProgressChanged;
     public GameEvent OnLevelUp;
     public GameEvent OnWeaponChanged;
+    public GameEvent OnHealthChanged;
 
     [Header("Skill selection sprites")]
     public Sprite rotationSpeed_sprite;
@@ -143,9 +144,12 @@ public class ShipController : MonoBehaviour
 
     public void doDamage(float amount)
     {
+        Debug.Log("Enter damage section");
         AudioSource.PlayClipAtPoint(damageSound, Camera.main.transform.position);
         shipStats.currentHealth -= amount;
         float h = shipStats.currentHealth / shipStats.maxHealth;
+        OnHealthChanged.Raise(this, h);
+        Debug.Log("CurrentHealth " + h);
         GetComponent<SpriteRenderer>().color = new Color(1f, h, h);
 
         if (shipStats.currentHealth <= 0)

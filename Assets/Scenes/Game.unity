@@ -980,7 +980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnIntervall
-      value: 30
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: splitterObjects
@@ -1256,7 +1256,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 849555082373cc542b53464fed65810c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1842,11 +1842,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnIntervall
-      value: 30
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnStartTimer
-      value: 20
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: splitterObjects
@@ -2087,11 +2087,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnAmount
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnEndTimer
       value: 99999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
+      propertyPath: spawnIntervall
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
+      propertyPath: spawnStartTimer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: splitterObjects

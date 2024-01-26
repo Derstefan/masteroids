@@ -3,12 +3,12 @@ using UnityEngine;
 public class ShipStats : MonoBehaviour
 {
     public float rotationSpeed = 110.0f;
-    public float speed = 3f;
+    public float speed = 4f;
     public int exp = 0;
     public int expToNextLvl = 7;
     public float maxHealth = 100f;
     public float currentHealth = 100f;
-    public float maxSpeed = 20f;
+    public float maxSpeed = 6f;
     public Sprite rotationSpeed_sprite;
     public Sprite speed_sprite;
     public Sprite health_sprite;

@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Scenes/GameMenu/Menu_Style.uss?fileID=7433441132597879392&amp;guid=61840be7cb364c242ab730a043a7b6a1&amp;type=3#Menu_Style" />
-    <ui:VisualElement style="flex-grow: 1; background-color: rgb(0, 0, 0); justify-content: center; align-self: center; width: 100%; height: 100%;">
+    <ui:VisualElement style="flex-grow: 1; background-color: rgb(0, 0, 0); justify-content: center; align-self: center; width: 100%; height: 100%; opacity: 0.97;">
         <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); margin-left: 250px; margin-right: 250px; margin-top: 151px; margin-bottom: 151px; position: relative; width: initial; align-items: center; align-self: center; justify-content: center; -unity-font-definition: url(&apos;project://database/Assets/Fonts/PIXELSPLITTER-BOLD.TTF?fileID=12800000&amp;guid=b7943e2c695382645ab2901473b85bed&amp;type=3#PIXELSPLITTER-BOLD&apos;); font-size: 30px;">
             <ui:Button text="Start Game" display-tooltip-when-elided="true" name="start" usage-hints="DynamicColor" class="Default_Menu_Button" />
             <ui:Label tabindex="-1" text="Highscore: ?" display-tooltip-when-elided="true" name="highscore" />

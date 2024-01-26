@@ -34,6 +34,7 @@ public class GameMenuScript : MonoBehaviour
         HUD = root.Q<VisualElement>("HUD");
         highscoreUI = root.Q<Label>("score");
         progressBar = root.Q<VisualElement>("Foreground");
+        healthBar = root.Q<VisualElement>("Foreground_health");
         weaponImage = root.Q<Button>("Weapon_Image");
         root.Q<Button>("menu").clicked += LoadMenu;
     }
@@ -53,7 +54,6 @@ public class GameMenuScript : MonoBehaviour
         foreach (Button button in buttons)
         {
             button.RegisterCallback<ClickEvent>(GetSkillFromButton);
-            Debug.Log("Click event registered " + button.text);
         }
 
         SetLevelMenuInactive();
@@ -123,7 +123,6 @@ public class GameMenuScript : MonoBehaviour
                 selectableSkills.Add(weapons[i].name);
                 String buttonText = RemoveVovels(weapons[i].name);
                 button.text = buttonText;
-                Debug.Log(buttonText);
                 button.style.display = DisplayStyle.Flex;
                 button[0].style.backgroundImage = new StyleBackground(weapons[i].sprite);
                 i++;
@@ -142,8 +141,6 @@ public class GameMenuScript : MonoBehaviour
                 strg += c;
             }
         }
-
-        Debug.Log("Vovel kill " + strg);
         return strg;
     }
 

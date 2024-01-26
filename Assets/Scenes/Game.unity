@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 60530821}
   - component: {fileID: 60530823}
   - component: {fileID: 60530824}
+  - component: {fileID: 60530825}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -252,6 +253,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &60530825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60530820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb667b43eb503a44ac354a285e22b81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvents:
+  - {fileID: 11400000, guid: 6fdc0cded7aa97840a3f70ed525ad7c2, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 60530823}
+        m_TargetAssemblyTypeName: GameMenuScript, Assembly-CSharp
+        m_MethodName: SetHealth
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &165950833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -346,19 +376,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
       propertyPath: spawnAmount
-      value: 11
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
       propertyPath: spawnIntervall
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
       propertyPath: spawnStartTimer
       value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
-      propertyPath: spawnAmountIncrease
+      propertyPath: splitterAmountMax
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
+      propertyPath: splitterAmountMin
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
+      propertyPath: spawnAmountIncrease
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
       propertyPath: spawnForceMultiplier
@@ -582,12 +620,12 @@ MonoBehaviour:
   OnProgressChanged: {fileID: 11400000, guid: dbeee8e7aef865444bbd900c96556fda, type: 2}
   OnLevelUp: {fileID: 11400000, guid: 382df44480b9d34408374bee28ee877c, type: 2}
   OnWeaponChanged: {fileID: 11400000, guid: 5000ce5f2ea6a354f837947169ae6c79, type: 2}
+  OnHealthChanged: {fileID: 11400000, guid: 6fdc0cded7aa97840a3f70ed525ad7c2, type: 2}
   rotationSpeed_sprite: {fileID: -5112143105788710107, guid: 19364d83fb2f3b34789a5d9a60afb92a, type: 3}
   speed_sprite: {fileID: -4284474766959344382, guid: 10ca7a169534ab54ca404a104fa12a65, type: 3}
   health_sprite: {fileID: -8504478667243500470, guid: bcc9234664b11cf499dc33244141e179, type: 3}
   attackSpeed_sprite: {fileID: 8195489750646124712, guid: c3cdb0b0b2aad144c9ea2aa892daba38, type: 3}
   lvl: 1
-  shipStats: {fileID: 0}
 --- !u!114 &301943381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -972,7 +1010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnAmount
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnEndTimer
@@ -980,12 +1018,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnIntervall
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: splitterObjects
       value: 
       objectReference: {fileID: 1668052570}
+    - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
+      propertyPath: spawnAmountIncrease
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1200,9 +1242,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6071842303519050972, guid: 376b95b88ae079f4b9b7781f5124879a, type: 3}
+      propertyPath: spawnAmount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071842303519050972, guid: 376b95b88ae079f4b9b7781f5124879a, type: 3}
+      propertyPath: spawnIntervall
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071842303519050972, guid: 376b95b88ae079f4b9b7781f5124879a, type: 3}
       propertyPath: splitterObjects
       value: 
       objectReference: {fileID: 1189228306}
+    - target: {fileID: 6071842303519050972, guid: 376b95b88ae079f4b9b7781f5124879a, type: 3}
+      propertyPath: spawnAmountIncrease
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8208719035873257249, guid: 376b95b88ae079f4b9b7781f5124879a, type: 3}
       propertyPath: m_Name
       value: mediumAsteroid
@@ -1256,7 +1310,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 849555082373cc542b53464fed65810c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.982
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1679,6 +1733,18 @@ PrefabInstance:
       propertyPath: activated
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
+      propertyPath: spawnAmount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
+      propertyPath: spawnIntervall
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071842303519050972, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
+      propertyPath: spawnAmountIncrease
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8208719035873257249, guid: 561a972eaefb2d54ab6ab3f965d68f8c, type: 3}
       propertyPath: m_Name
       value: smallAsteroid
@@ -1842,7 +1908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnIntervall
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2562766549089435388, guid: 6162a251ce7a944428e7902848ae3fe5, type: 3}
       propertyPath: spawnStartTimer

@@ -22,6 +22,8 @@ public class GameController : MonoBehaviour
     }
     private int lives;
 
+    public static int endscore = 0;
+
     private int asteroidCount = 0;
 
     void Start()
@@ -198,5 +200,11 @@ public class GameController : MonoBehaviour
     {
         _highscore += value;
         OnScoreChanged.Raise(this, _highscore);
+    }
+
+    public void SetEndscore()
+    {
+        endscore = _highscore;
+        Debug.Log("Endscore " + endscore); 
     }
 }

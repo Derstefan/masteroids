@@ -27,6 +27,7 @@ public class ShipController : MonoBehaviour
     public GameEvent OnProgressChanged;
     public GameEvent OnLevelUp;
     public GameEvent OnWeaponChanged;
+    public GameEvent OnHealthChanged;
 
     [Header("Skill selection sprites")]
     public Sprite rotationSpeed_sprite;
@@ -61,6 +62,7 @@ public class ShipController : MonoBehaviour
         {
             allWeapons[i] = Instantiate(allWeaponPrefabs[i]);
             allWeapons[i].transform.parent = transform;
+            //Debug.Log("From Ship Weapon and Sprite of type: " + allWeapons[i].gameObject.name + " " + allWeapons[i].GetComponent<WeaponController>().sprite);
         }
         skillManager = new SkillManager(this);
         skillManager.addStatSkills(shipStats.getSkills());
@@ -146,11 +148,13 @@ public class ShipController : MonoBehaviour
         AudioSource.PlayClipAtPoint(damageSound, Camera.main.transform.position);
         shipStats.currentHealth -= amount;
         float h = shipStats.currentHealth / shipStats.maxHealth;
+        OnHealthChanged.Raise(this, h);
         GetComponent<SpriteRenderer>().color = new Color(1f, h, h);
 
         if (shipStats.currentHealth <= 0)
         {
             gameOver = true;
+            gameController.SetEndscore();
             StartCoroutine(ShakeScreen(1f, 1f));
             StartCoroutine(gotToMainManu(0.8f));
 
@@ -167,7 +171,9 @@ public class ShipController : MonoBehaviour
     public void doHeal(float amount)
     {
         shipStats.currentHealth += amount;
+        Debug.Log("Healing. " + amount);
         float h = shipStats.currentHealth / shipStats.maxHealth;
+        OnHealthChanged.Raise(this, h);
         GetComponent<SpriteRenderer>().color = new Color(1f, h, h);
     }
 

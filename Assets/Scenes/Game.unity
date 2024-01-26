@@ -626,7 +626,6 @@ MonoBehaviour:
   health_sprite: {fileID: -8504478667243500470, guid: bcc9234664b11cf499dc33244141e179, type: 3}
   attackSpeed_sprite: {fileID: 8195489750646124712, guid: c3cdb0b0b2aad144c9ea2aa892daba38, type: 3}
   lvl: 1
-  shipStats: {fileID: 0}
 --- !u!114 &301943381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1311,7 +1310,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 849555082373cc542b53464fed65810c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.982
   m_Pitch: 1
   Loop: 1
   Mute: 0

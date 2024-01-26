@@ -154,6 +154,7 @@ public class ShipController : MonoBehaviour
         if (shipStats.currentHealth <= 0)
         {
             gameOver = true;
+            gameController.SetEndscore();
             StartCoroutine(ShakeScreen(1f, 1f));
             StartCoroutine(gotToMainManu(0.8f));
 

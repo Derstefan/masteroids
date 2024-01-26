@@ -62,6 +62,7 @@ public class ShipController : MonoBehaviour
         {
             allWeapons[i] = Instantiate(allWeaponPrefabs[i]);
             allWeapons[i].transform.parent = transform;
+            //Debug.Log("From Ship Weapon and Sprite of type: " + allWeapons[i].gameObject.name + " " + allWeapons[i].GetComponent<WeaponController>().sprite);
         }
         skillManager = new SkillManager(this);
         skillManager.addStatSkills(shipStats.getSkills());
@@ -144,12 +145,10 @@ public class ShipController : MonoBehaviour
 
     public void doDamage(float amount)
     {
-        Debug.Log("Enter damage section");
         AudioSource.PlayClipAtPoint(damageSound, Camera.main.transform.position);
         shipStats.currentHealth -= amount;
         float h = shipStats.currentHealth / shipStats.maxHealth;
         OnHealthChanged.Raise(this, h);
-        Debug.Log("CurrentHealth " + h);
         GetComponent<SpriteRenderer>().color = new Color(1f, h, h);
 
         if (shipStats.currentHealth <= 0)

@@ -13,7 +13,7 @@ public class GranadeWeaponController : WeaponController
     public override Skill[] getWeaponSkills()
     {
         return new Skill[]{
-            new UnlockSkill("Granade", 7,null,this.sprite,this),
+            new UnlockSkill("Granade Weapon", 7,null,this.sprite,this),
             new LevelingSkill("Granade Damage", 8, "Granade",this.sprite, this),
             new LevelingSkill("Granade Explosion Radius", 9, "Granade",this.sprite, this),
             new LevelingSkill("Granade AttackSpeed", 20, "Granade",this.sprite, this),

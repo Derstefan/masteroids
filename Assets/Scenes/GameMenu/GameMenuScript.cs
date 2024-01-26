@@ -54,7 +54,6 @@ public class GameMenuScript : MonoBehaviour
         foreach (Button button in buttons)
         {
             button.RegisterCallback<ClickEvent>(GetSkillFromButton);
-            Debug.Log("Click event registered " + button.text);
         }
 
         SetLevelMenuInactive();
@@ -90,10 +89,8 @@ public class GameMenuScript : MonoBehaviour
 
     public void SetHealth(Component sender, object data)
     {
-        Debug.Log("Enter set health");
         if (data is float)
         {
-            Debug.Log("Execute set health");
             healthBar.transform.scale = new Vector3((float)data, 1, 1);
         }
     }

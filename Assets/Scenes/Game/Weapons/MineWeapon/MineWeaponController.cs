@@ -12,7 +12,7 @@ public class MineWeaponController : WeaponController
     public override Skill[] getWeaponSkills()
     {
         return new Skill[]{
-            new UnlockSkill("Mine", 10,null,this.sprite,this),
+            new UnlockSkill("Mine Weapon", 10,null,this.sprite,this),
             new LevelingSkill("Mine Damage", 11, "Mine",this.sprite, this),
             new LevelingSkill("Mine Explosion Radius", 12, "Mine",this.sprite, this),
             new LevelingSkill("Mine AttackSpeed", 20, "Mine",this.sprite, this),

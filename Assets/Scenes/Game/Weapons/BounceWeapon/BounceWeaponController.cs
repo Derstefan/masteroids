@@ -14,7 +14,7 @@ public class BounceWeaponController : WeaponController
             new UnlockSkill("Bounce Weapon", 10,null,this.sprite,this),
             new LevelingSkill("Damage Bigger Weapon", 0, "Bounce Weapon",this.sprite,this),
             new LevelingSkill("AttackSpeed Bigger Weapon", 0, "Bounce Weapon",this.sprite, this),
-            new LevelingSkill("Projectil Speed Bigger Weapon", 0, "Damage Bounce Weapon",this.sprite, this),
+            new LevelingSkill("Projectil Speed Bounce Weapon", 0, "Damage Bounce Weapon",this.sprite, this),
 
             };
     }
